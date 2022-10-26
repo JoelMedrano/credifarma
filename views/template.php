@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /*=============================================
 Capturar las rutas de la URL
@@ -23,7 +24,7 @@ foreach ($routesArray as $key => $value) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Fixed Sidebar</title>
+    <title>Credifarma</title>
 
     <link rel="icon" href="views/assets/img/template/icono.png">
 
@@ -35,70 +36,91 @@ foreach ($routesArray as $key => $value) {
     <link rel="stylesheet" href="views/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="views/assets/plugins/adminlte/css/adminlte.min.css">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="views/assets/custom/template/template.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed text-sm sidebar-collapse layout-navbar-fixed">
-    <!-- Site wrapper -->
-    <div class="wrapper">
-        <!-- Navbar -->
-        <?php include "views/modules/navbar.php"; ?>
+    <?php
 
-        <!-- Main Sidebar Container -->
-        <?php include "views/modules/sidebar.php"; ?>
+    if (!isset($_SESSION["admin"])) {
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        include "views/pages/login/login.php";
 
-            <?php
+        echo '</body></head>';
 
-            if (!empty($routesArray[1])) {
+        return;
+    }
+    ?>
 
-                if (
-                    $routesArray[1] == "admins" ||
-                    $routesArray[1] == "users" ||
-                    $routesArray[1] == "stores" ||
-                    $routesArray[1] == "categories" ||
-                    $routesArray[1] == "subcategories" ||
-                    $routesArray[1] == "products" ||
-                    $routesArray[1] == "orders" ||
-                    $routesArray[1] == "sales" ||
-                    $routesArray[1] == "disputes" ||
-                    $routesArray[1] == "messages"
-                ) {
+    <?php if (isset($_SESSION["admin"])) : ?>
 
-                    include "views/pages/" . $routesArray[1] . "/" . $routesArray[1] . ".php";
+        <!-- Site wrapper -->
+        <div class="wrapper">
+            <!-- Navbar -->
+            <?php include "views/modules/navbar.php"; ?>
+
+            <!-- Main Sidebar Container -->
+            <?php include "views/modules/sidebar.php"; ?>
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+
+                <?php
+
+                if (!empty($routesArray[1])) {
+
+                    if (
+                        $routesArray[1] == "admins" ||
+                        $routesArray[1] == "users" ||
+                        $routesArray[1] == "stores" ||
+                        $routesArray[1] == "categories" ||
+                        $routesArray[1] == "subcategories" ||
+                        $routesArray[1] == "products" ||
+                        $routesArray[1] == "orders" ||
+                        $routesArray[1] == "sales" ||
+                        $routesArray[1] == "disputes" ||
+                        $routesArray[1] == "messages" ||
+                        $routesArray[1] == "logout"
+                    ) {
+
+                        include "views/pages/" . $routesArray[1] . "/" . $routesArray[1] . ".php";
+                    } else {
+
+                        include "views/pages/404/404.php";
+                    }
                 } else {
 
-                    include "views/pages/404/404.php";
+                    include "views/pages/home/home.php";
                 }
-            } else {
 
-                include "views/pages/home/home.php";
-            }
+                ?>
 
-            ?>
+                <!-- Content Header (Page header) -->
 
-            <!-- Content Header (Page header) -->
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
 
-            <!-- /.content -->
+            <?php include "modules/footer.php"; ?>
+
         </div>
-        <!-- /.content-wrapper -->
+        <!-- ./wrapper -->
 
-        <?php include "modules/footer.php"; ?>
+        <!-- jQuery -->
+        <script src="views/assets/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="views/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="views/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="views/assets/plugins/adminlte/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="views/assets/plugins/adminlte/js/demo.js"></script>
 
-    </div>
-    <!-- ./wrapper -->
+        <script src="views/assets/custom/forms/forms.js"></script>
 
-    <!-- jQuery -->
-    <script src="views/assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="views/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="views/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="views/assets/plugins/adminlte/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="views/assets/plugins/adminlte/js/demo.js"></script>
+    <?php endif ?>
 </body>
 
 </html>
