@@ -101,3 +101,17 @@ $(document).ready(function () {
         $("#remember").attr("checked", true);
     }
 });
+
+/*=============================================
+Activación de Bootstrap Switch
+=============================================*/
+$("input[data-bootstrap-switch]").each(function () {
+    $(this).bootstrapSwitch("state", $(this).prop("checked"));
+});
+
+/*=============================================
+Activación de Select 2
+=============================================*/
+$(".select2").select2({
+    theme: "bootstrap4",
+});

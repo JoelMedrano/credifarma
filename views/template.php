@@ -71,6 +71,24 @@ foreach ($routesArray as $key => $value) {
     <!-- https://sweetalert2.github.io/ -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    <style>
+        .table>tbody>tr>th,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>tbody>tr>td,
+        .table>tfoot>tr>td {
+            padding: 3px !important;
+        }
+
+        .table>thead>tr>th {
+            padding: 5px !important;
+        }
+
+        .dataTables_filter input {
+            width: 300px !important
+        }
+    </style>
+
     <?php if (!empty($routesArray[1]) && !isset($routesArray[2])) : ?>
 
         <?php if (
@@ -115,7 +133,6 @@ foreach ($routesArray as $key => $value) {
 
 <body class="hold-transition sidebar-mini layout-fixed text-sm sidebar-collapse layout-navbar-fixed">
     <?php
-
     if (!isset($_SESSION["admin"])) {
 
         include "views/pages/login/login.php";
@@ -130,6 +147,7 @@ foreach ($routesArray as $key => $value) {
 
         <!-- Site wrapper -->
         <div class="wrapper">
+
             <!-- Navbar -->
             <?php include "views/modules/navbar.php"; ?>
 
@@ -181,6 +199,8 @@ foreach ($routesArray as $key => $value) {
         <!-- ./wrapper -->
 
     <?php endif ?>
+
+    <script src="views/assets/custom/forms/forms.js"></script>
 </body>
 
 </html>
