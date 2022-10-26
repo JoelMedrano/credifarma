@@ -25,9 +25,31 @@ class AdminsController
                 );
 
                 $response = CurlController::request($url, $method, $fields);
-                echo '<pre>';
-                print_r($response);
-                echo '</pre>';
+
+                /*=============================================
+				Validamos que si escriba correctamente los datos
+				=============================================*/
+                if ($response->status == 200) {
+
+                    if ($response->results[0]->state_user != "1") {
+
+                        echo ' <div class="alert alert-danger">You do not have permissions to access</div>';
+                        return;
+                    }
+
+                    /*=============================================
+					Creamos variable de sesión
+					=============================================*/
+                    $_SESSION["admin"] = $response->results[0];
+
+                    echo '<script>
+
+					window.location = "' . $_SERVER["REQUEST_URI"] . '"
+
+					</script>';
+                } else {
+                    echo '<div class="alert alert-danger">' . $response->results . '</div>';
+                }
             } else {
                 echo '<div class="alert alert-danger">Field syntax error</div>';
             }
