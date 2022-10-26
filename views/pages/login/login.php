@@ -79,6 +79,4 @@
     <!-- jQuery -->
 </div>
 
-<!-- jQuery -->
-<script src="views/assets/plugins/jquery/jquery.min.js"></script>
 <script src="views/assets/custom/forms/forms.js"></script>
