@@ -42,7 +42,8 @@ class AdminsController
                     $_SESSION["admin"] = $response->results[0];
 
                     echo '<script>
-
+                    
+                    localStorage.setItem("token_user", "' . $response->results[0]->token_user . '");
 					window.location = "' . $_SERVER["REQUEST_URI"] . '"
 
 					</script>';
@@ -64,8 +65,8 @@ class AdminsController
         if (isset($_POST["displayname"])) {
             echo '<script>
 
-				/* matPreloader("on");
-				fncSweetAlert("loading", "Loading...", ""); */
+				matPreloader("on");
+				fncSweetAlert("loading", "Loading...", "");
 
 			</script>';
 
@@ -131,110 +132,21 @@ class AdminsController
                         $width = 300;
                         $height = 300;
 
-                        $directory = strtolower("views/" . $folder);
-                        /*=============================================
-                        Preguntamos primero si no existe el directorio, para crearlo
-                        =============================================*/
-
-                        if (!file_exists($directory)) {
-
-                            mkdir($directory, 0755);
-                        }
+                        $picture = TemplateController::saveImage($image, $folder, $type, $width, $height, $name);
 
                         /*=============================================
-                        Eliminar todos los archivos que existan en ese directorio
+                        Solicitud a la API
                         =============================================*/
 
-                        if ($folder != "img/products" && $folder != "img/stores") {
+                        $url = "users?id=" . $id . "&nameId=id_user&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+                        $method = "PUT";
+                        $fields = 'picture_user=' . $picture;
 
-                            $files = glob($directory . "/*");
+                        $response = CurlController::request($url, $method, $fields);
 
-                            foreach ($files as $file) {
+                        if ($response->status == 200) {
 
-                                unlink($file);
-                            }
-                        }
-                        /*=============================================
-                        Capturar ancho y alto original de la imagen
-                        =============================================*/
-
-                        list($lastWidth, $lastHeight) = getimagesize($_FILES["picture"]["tmp_name"]);
-
-                        /*=============================================
-                        De acuerdo al tipo de imagen aplicamos las funciones por defecto
-                        =============================================*/
-
-                        if ($type == "image/jpeg") {
-
-                            //definimos nombre del archivo
-                            $newName  = $name . '.jpg';
-
-                            //definimos el destino donde queremos guardar el archivo
-                            $folderPath = $directory . '/' . $newName;
-
-                            if (isset($image["mode"]) && $image["mode"] == "base64") {
-
-                                file_put_contents($folderPath, file_get_contents($image));
-                            } else {
-
-                                //Crear una copia de la imagen
-                                $start = imagecreatefromjpeg($image);
-
-                                //Instrucciones para aplicar a la imagen definitiva
-                                $end = imagecreatetruecolor($width, $height);
-
-                                imagecopyresized($end, $start, 0, 0, 0, 0, $width, $height, $lastWidth, $lastHeight);
-
-                                imagejpeg($end, $folderPath);
-                            }
-                        }
-
-                        if ($type == "image/png") {
-
-                            //definimos nombre del archivo
-                            $newName  = $name . '.png';
-
-                            //definimos el destino donde queremos guardar el archivo
-                            $folderPath = $directory . '/' . $newName;
-
-                            if (isset($image["mode"]) && $image["mode"] == "base64") {
-
-                                file_put_contents($folderPath, file_get_contents($image));
-                            } else {
-
-                                //Crear una copia de la imagen
-                                $start = imagecreatefrompng($image);
-
-                                //Instrucciones para aplicar a la imagen definitiva
-                                $end = imagecreatetruecolor($width, $height);
-
-                                imagealphablending($end, FALSE);
-
-                                imagesavealpha($end, TRUE);
-
-                                imagecopyresampled($end, $start, 0, 0, 0, 0, $width, $height, $lastWidth, $lastHeight);
-
-                                imagepng($end, $folderPath);
-                            }
-                        }
-                    } else {
-
-                        return "error";
-                    }
-
-                    /*=============================================
-                    Solicitud a la API
-                    =============================================*/
-
-                    $url = "users?id=" . $id . "&nameId=id_user&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
-                    $method = "PUT";
-                    $fields = 'picture_user=' . $newName;
-
-                    $response = CurlController::request($url, $method, $fields);
-
-                    if ($response->status == 200) {
-
-                        echo '<script>
+                            echo '<script>
 
                             fncFormatInputs();
                             matPreloader("off");
@@ -242,6 +154,7 @@ class AdminsController
                             fncSweetAlert("success", "Your records were created successfully", "/admins");
 
                         </script>';
+                        }
                     }
                 }
             } else {

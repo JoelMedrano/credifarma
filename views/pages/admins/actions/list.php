@@ -51,12 +51,14 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Picture</th>
-                    <th>Name</th>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Country</th>
-                    <th>City</th>
+                    <th>Estado</th>
+                    <th>Ruc</th>
+                    <th>Sucursal</th>
+                    <th>Ciudad</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>

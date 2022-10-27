@@ -53,18 +53,19 @@ class DatatableController
            	Búsqueda de datos
             =============================================*/
 
-            $select = "id_user,picture_user,displayname_user,username_user,email_user,country_user,city_user,date_created_user";
+            $select = "id_user,picture_user,displayname_user,username_user,email_user,state_user,id_company_user,ruc_company,name_company,city_company,date_created_user";
 
             if (!empty($_POST['search']['value'])) {
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["displayname_user", "username_user", "email_user", "country_user", "city_user", "date_created_user"];
+                    $linkTo = ["displayname_user", "username_user", "email_user", "ruc_company", "name_company", "city_company", "date_created_user"];
 
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
                     foreach ($linkTo as $key => $value) {
-                        $url = "users?select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+
+                        $url = "relations?rel=users,companies&type=user,company&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                         $data = CurlController::request($url, $method, $fields)->results;
 
@@ -91,7 +92,7 @@ class DatatableController
                 /*=============================================
                 Seleccionar datos
                 =============================================*/
-                $url = "users?select=" . $select . "&linkTo=date_created_user&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                $url = "relations?rel=users,companies&type=user,company&linkTo=date_created_user&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt" . $length;
 
                 $data = CurlController::request($url, $method, $fields)->results;
 
@@ -151,8 +152,10 @@ class DatatableController
                 $displayname_user = $value->displayname_user;
                 $username_user = $value->username_user;
                 $email_user = $value->email_user;
-                $country_user = $value->country_user;
-                $city_user = $value->city_user;
+                $state_user = $value->state_user;
+                $ruc_company = $value->ruc_company;
+                $name_company = $value->name_company;
+                $city_company = $value->city_company;
                 $date_created_user = $value->date_created_user;
 
                 $dataJson .= '{ 
@@ -162,8 +165,10 @@ class DatatableController
             		"displayname_user":"' . $displayname_user . '",
             		"username_user":"' . $username_user . '",
             		"email_user":"' . $email_user . '",
-            		"country_user":"' . $country_user . '",
-            		"city_user":"' . $city_user . '",
+            		"state_user":"' . $state_user . '",
+            		"ruc_company":"' . $ruc_company . '",
+                    "name_company":"' . $name_company . '",
+                    "city_company":"' . $city_company . '",
             		"date_created_user":"' . $date_created_user . '",
             		"actions":"' . $actions . '"
 
