@@ -8,8 +8,8 @@
 
             require_once "controllers/admins.controller.php";
 
-            /* $create = new AdminsController();
-            $create->create(); */
+            $create = new AdminsController();
+            $create->create();
 
             ?>
 
@@ -21,7 +21,7 @@
 
                 <div class="form-group mt-5">
 
-                    <label>Name</label>
+                    <label>Nombre</label>
 
                     <input type="text" class="form-control" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,}" onchange="validateJS(event,'text')" name="displayname" required>
 
@@ -83,7 +83,7 @@
 
                 <div class="form-group mt-2">
 
-                    <label>Picture</label>
+                    <label>Foto</label>
 
                     <label for="customFile" class="d-flex justify-content-center">
 
@@ -109,27 +109,66 @@
                 </div>
 
                 <!--=====================================
+		        Compañias
+		        ======================================-->
+
+                <div class="form-group mt-2">
+
+                    <label>Compañia<sup class="text-danger">*</sup></label>
+
+                    <?php
+
+                    $url = "companies?select=id_company,name_company,ruc_company";
+                    $method = "GET";
+                    $fields = array();
+
+                    $company = CurlController::request($url, $method, $fields)->results;
+
+                    ?>
+
+                    <div class="form-group">
+
+                        <select class="form-control select2" name="company" style="width:100%" required>
+
+                            <option value="">Seleccionar Compañia</option>
+
+                            <?php foreach ($company as $key => $value) : ?>
+
+                                <option value="<?php echo $value->id_company ?>"><?php echo $value->ruc_company ?> - <?php echo $value->name_company ?></option>
+
+                            <?php endforeach ?>
+
+                        </select>
+
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+
+                    </div>
+
+                </div>
+
+                <!--=====================================
                 País
                 ======================================-->
 
                 <div class="form-group mt-2">
 
-                    <label>Country</label>
+                    <label>ROLES</label>
 
                     <?php
 
-                    $countries = file_get_contents("views/assets/json/countries.json");
-                    $countries = json_decode($countries, true);
+                    $roles = file_get_contents("views/assets/json/roles.json");
+                    $roles = json_decode($roles, true);
 
                     ?>
 
-                    <select class="form-control select2 changeCountry" name="country" required>
+                    <select class="form-control select2" name="rol" required>
 
-                        <option value>Select country</option>
+                        <option value>Seleccionar Rol</option>
 
-                        <?php foreach ($countries as $key => $value) : ?>
+                        <?php foreach ($roles as $key => $value) : ?>
 
-                            <option value="<?php echo $value["name"] ?>_<?php echo $value["dial_code"] ?>"><?php echo $value["name"] ?></option>
+                            <option value="<?php echo $value["rol"] ?>"><?php echo $value["name_rol"] ?></option>
 
                         <?php endforeach ?>
 
@@ -140,62 +179,7 @@
 
                 </div>
 
-                <!--=====================================
-                Ciudad
-                ======================================-->
-
-                <div class="form-group mt-2">
-
-                    <label>City</label>
-
-                    <input type="text" class="form-control" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,}" onchange="validateJS(event,'text')" name="city" required>
-
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-
-                </div>
-
-                <!--=====================================
-                Dirección
-                ======================================-->
-
-                <div class="form-group mt-2">
-
-                    <label>Address</label>
-
-                    <input type="text" class="form-control" pattern='[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\"\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}' onchange="validateJS(event,'regex')" name="address" required>
-
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-
-                </div>
-
-                <!--=====================================
-                Teléfono
-                ======================================-->
-
-                <div class="form-group mt-2 mb-5">
-
-                    <label>Phone</label>
-
-                    <div class="input-group">
-
-                        <div class="input-group-append">
-                            <span class="input-group-text dialCode">+00</span>
-                        </div>
-
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\0-9 ]{1,}" onchange="validateJS(event,'phone')" name="phone" required>
-
-                    </div>
-
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-
-                </div>
-
-
             </div>
-
 
         </div>
 

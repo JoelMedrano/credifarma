@@ -129,6 +129,8 @@ foreach ($routesArray as $key => $value) {
 
     <?php endif ?>
 
+    <script src="views/assets/custom/alerts/alerts.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed text-sm sidebar-collapse layout-navbar-fixed">

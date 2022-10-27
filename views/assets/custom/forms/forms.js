@@ -115,3 +115,81 @@ Activación de Select 2
 $(".select2").select2({
     theme: "bootstrap4",
 });
+
+/*=============================================
+Validamos imagen
+=============================================*/
+
+function validateImageJS(event, input) {
+    var image = event.target.files[0];
+
+    if (
+        image["type"] !== "image/png" &&
+        image["type"] !== "image/jpeg" &&
+        image["type"] !== "image/gif"
+    ) {
+        fncNotie(3, "The image must be in JPG, PNG or GIF format");
+
+        return;
+    } else if (image["size"] > 2000000) {
+        fncNotie(3, "Image must not weigh more than 2MB");
+
+        return;
+    } else {
+        var data = new FileReader();
+        data.readAsDataURL(image);
+
+        $(data).on("load", function (event) {
+            var path = event.target.result;
+
+            $("." + input).attr("src", path);
+        });
+    }
+}
+
+/*=============================================
+Capturar código telefónico
+=============================================*/
+$(document).on("change", ".changeCountry", function () {
+    $(".dialCode").html($(this).val().split("_")[1]);
+});
+
+/*=============================================
+Función para validar data repetida
+=============================================*/
+function validateRepeat(event, type, table, suffix) {
+    var data = new FormData();
+    data.append("data", event.target.value);
+    data.append("table", table);
+    data.append("suffix", suffix);
+
+    $.ajax({
+        url: "ajax/ajax-validate.php",
+        method: "POST",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            if (response == 200) {
+                event.target.value = "";
+                $(event.target).parent().addClass("was-validated");
+                $(event.target)
+                    .parent()
+                    .children(".invalid-feedback")
+                    .html("the data written already exists in the database");
+            } else {
+                validateJS(event, type);
+
+                if (
+                    table == "categories" ||
+                    table == "subcategories" ||
+                    table == "stores" ||
+                    table == "products"
+                ) {
+                    createUrl(event, "url-" + suffix);
+                }
+            }
+        },
+    });
+}
