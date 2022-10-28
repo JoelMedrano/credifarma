@@ -92,7 +92,7 @@ class DatatableController
                 /*=============================================
                 Seleccionar datos
                 =============================================*/
-                $url = "relations?rel=users,companies&type=user,company&linkTo=date_created_user&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt" . $length;
+                $url = "relations?rel=users,companies&type=user,company&linkTo=date_created_user&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                 $data = CurlController::request($url, $method, $fields)->results;
 
