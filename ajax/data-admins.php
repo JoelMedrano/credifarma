@@ -92,7 +92,7 @@ class DatatableController
                 /*=============================================
                 Seleccionar datos
                 =============================================*/
-                $url = "relations?rel=users,companies&type=user,company&linkTo=date_created_user&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt" . $length;
+                $url = "relations?rel=users,companies&type=user,company&linkTo=date_created_user&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&select=" . $select . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                 $data = CurlController::request($url, $method, $fields)->results;
 
@@ -134,7 +134,7 @@ class DatatableController
                 } else {
                     $picture_user = "<img src='" . TemplateController::srcImg() . "views/img/users/" . $value->id_user . "/" . $value->picture_user . "' class='img-circle' style='width:40px'>";
 
-                    $actions = "<a href='' class='btn btn-warning btn-sm mr-1 rounded-circle'>
+                    $actions = "<a href='/admins/edit/" . base64_encode($value->id_user . "~" . $_GET["token"]) . "' class='btn btn-warning btn-sm mr-1 rounded-circle'>
 
                     <i class='fas fa-pencil-alt'></i>
 

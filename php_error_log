@@ -194,3 +194,22 @@
 [27-Oct-2022 17:23:43 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 107
 [27-Oct-2022 17:23:43 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 116
 [27-Oct-2022 17:23:43 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 125
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 44
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 53
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 62
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 71
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 80
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 89
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 98
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 107
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 116
+[28-Oct-2022 12:47:19 America/Lima] PHP Notice:  Undefined offset: 1 in C:\xampp\htdocs\credifarma\views\modules\sidebar.php on line 125
+[28-Oct-2022 13:15:02 America/Lima] PHP Notice:  Trying to get property 'results' of non-object in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 169
+[28-Oct-2022 13:15:02 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 182
+[28-Oct-2022 14:18:03 America/Lima] PHP Notice:  Trying to get property 'id_company' of non-object in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 186
+[28-Oct-2022 14:18:03 America/Lima] PHP Notice:  Trying to get property 'ruc_company' of non-object in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 186
+[28-Oct-2022 14:18:03 America/Lima] PHP Notice:  Trying to get property 'name_company' of non-object in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 186
+[28-Oct-2022 14:19:13 America/Lima] PHP Notice:  Undefined variable: company in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 27
+[28-Oct-2022 14:21:27 America/Lima] PHP Notice:  Undefined property: stdClass::$country_user in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 218
+[28-Oct-2022 14:21:27 America/Lima] PHP Notice:  Undefined property: stdClass::$phone_user in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 218
+[28-Oct-2022 14:21:27 America/Lima] PHP Notice:  Undefined property: stdClass::$country_user in C:\xampp\htdocs\credifarma\views\pages\admins\actions\edit.php on line 218
