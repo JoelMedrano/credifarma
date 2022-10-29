@@ -134,7 +134,7 @@ class DatatableController
                 } else {
                     $picture_user = "<img src='" . TemplateController::srcImg() . "views/img/users/" . $value->id_user . "/" . $value->picture_user . "' class='img-circle' style='width:40px'>";
 
-                    $actions = "<a href='' class='btn btn-warning btn-sm mr-1 rounded-circle'>
+                    $actions = "<a href='/admins/edit/" . base64_encode($value->id_user . "~" . $_GET["token"]) . "' class='btn btn-warning btn-sm mr-1 rounded-circle'>
 
                     <i class='fas fa-pencil-alt'></i>
 

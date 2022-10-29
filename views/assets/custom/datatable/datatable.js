@@ -21,7 +21,9 @@ function execDatatable(text) {
                 "&between1=" +
                 $("#between1").val() +
                 "&between2=" +
-                $("#between2").val(),
+                $("#between2").val() +
+                "&token=" +
+                localStorage.getItem("token_user"),
             type: "POST",
         },
         columns: [
