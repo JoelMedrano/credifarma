@@ -53,7 +53,7 @@ function validateJS(event, type) {
 
     if (type == "regex")
         pattern =
-            /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\"\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/;
+            /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/;
 
     if (type == "icon") {
         pattern =
@@ -101,3 +101,107 @@ $(document).ready(function () {
         $("#remember").attr("checked", true);
     }
 });
+
+/*=============================================
+Activación de Bootstrap Switch
+=============================================*/
+$("input[data-bootstrap-switch]").each(function () {
+    $(this).bootstrapSwitch("state", $(this).prop("checked"));
+});
+
+/*=============================================
+Activación de Select 2
+=============================================*/
+$(".select2").select2({
+    theme: "bootstrap4",
+});
+
+/*=============================================
+Validamos imagen
+=============================================*/
+
+function validateImageJS(event, input) {
+    var image = event.target.files[0];
+
+    if (
+        image["type"] !== "image/png" &&
+        image["type"] !== "image/jpeg" &&
+        image["type"] !== "image/gif"
+    ) {
+        fncNotie(3, "The image must be in JPG, PNG or GIF format");
+
+        return;
+    } else if (image["size"] > 2000000) {
+        fncNotie(3, "Image must not weigh more than 2MB");
+
+        return;
+    } else {
+        var data = new FileReader();
+        data.readAsDataURL(image);
+
+        $(data).on("load", function (event) {
+            var path = event.target.result;
+
+            $("." + input).attr("src", path);
+        });
+    }
+}
+
+/*=============================================
+Capturar código telefónico
+=============================================*/
+$(document).on("change", ".changeCountry", function () {
+    $(".dialCode").html($(this).val().split("_")[1]);
+});
+
+/*=============================================
+Función para validar data repetida
+=============================================*/
+function validateRepeat(event, type, table, suffix) {
+    var data = new FormData();
+    data.append("data", event.target.value);
+    data.append("table", table);
+    data.append("suffix", suffix);
+
+    $.ajax({
+        url: "ajax/ajax-validate.php",
+        method: "POST",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            if (response == "200") {
+                event.target.value = "";
+                $(event.target).parent().addClass("was-validated");
+                $(event.target)
+                    .parent()
+                    .children(".invalid-feedback")
+                    .html("Ya existe en la base de datos");
+            } else {
+                validateJS(event, type);
+            }
+        },
+    });
+}
+
+/*=============================================
+Función para crear Url's
+=============================================*/
+function createUrl(event, name) {
+    var value = event.target.value;
+    value = value.toLowerCase();
+    value = value.replace(
+        /[#\\;\\$\\&\\%\\=\\(\\)\\:\\,\\.\\¿\\¡\\!\\?\\]/g,
+        ""
+    );
+    value = value.replace(/[ ]/g, "-");
+    value = value.replace(/[á]/g, "a");
+    value = value.replace(/[é]/g, "e");
+    value = value.replace(/[í]/g, "i");
+    value = value.replace(/[ó]/g, "o");
+    value = value.replace(/[ú]/g, "u");
+    value = value.replace(/[ñ]/g, "n");
+
+    $('[name="' + name + '"]').val(value);
+}

@@ -26,23 +26,115 @@ foreach ($routesArray as $key => $value) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Credifarma</title>
 
-    <link rel="icon" href="views/assets/img/template/icono.png">
+    <base href="<?php echo TemplateController::path() ?>">
 
+    <link rel="icon" href="views/assets/img/template/icono.png">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="views/assets/plugins/fontawesome-free/css/all.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="views/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="views/assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="views/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Material Preloader -->
+    <link rel="stylesheet" href="views/assets/plugins/material-preloader/material-preloader.css">
+    <!-- Notie Alert -->
+    <link rel="stylesheet" href="views/assets/plugins/notie/notie.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="views/assets/plugins/adminlte/css/adminlte.min.css">
     <!-- Template CSS -->
     <link rel="stylesheet" href="views/assets/custom/template/template.css">
+
+    <!-- jQuery -->
+    <script src="views/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="views/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="views/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="views/assets/plugins/adminlte/js/adminlte.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="views/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- Select2 -->
+    <script src="views/assets/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Material Preloader -->
+    <!-- https://www.jqueryscript.net/loading/Google-Inbox-Style-Linear-Preloader-Plugin-with-jQuery-CSS3.html -->
+    <script src="views/assets/plugins/material-preloader/material-preloader.js"></script>
+    <!-- Notie Alert -->
+    <!-- https://jaredreich.com/notie/ -->
+    <!-- https://github.com/jaredreich/notie -->
+    <script src="views/assets/plugins/notie/notie.min.js"></script>
+    <!-- Sweet Alert -->
+    <!-- https://sweetalert2.github.io/ -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <style>
+        .table>tbody>tr>th,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>tbody>tr>td,
+        .table>tfoot>tr>td {
+            padding: 3px !important;
+        }
+
+        .table>thead>tr>th {
+            padding: 5px !important;
+        }
+
+        .dataTables_filter input {
+            width: 300px !important
+        }
+    </style>
+
+    <?php if (!empty($routesArray[1]) && !isset($routesArray[2])) : ?>
+
+        <?php if (
+            $routesArray[1] == "admins" ||
+            $routesArray[1] == "users" ||
+            $routesArray[1] == "stores" ||
+            $routesArray[1] == "categories" ||
+            $routesArray[1] == "subcategories" ||
+            $routesArray[1] == "products" ||
+            $routesArray[1] == "orders" ||
+            $routesArray[1] == "sales" ||
+            $routesArray[1] == "disputes" ||
+            $routesArray[1] == "messages"
+        ) : ?>
+
+            <!-- DataTables  & Plugins -->
+            <link rel="stylesheet" href="views/assets/plugins/daterangepicker/daterangepicker.css">
+            <link rel="stylesheet" href="views/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+            <link rel="stylesheet" href="views/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+            <link rel="stylesheet" href="views/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+            <script src="views/assets/plugins/moment/moment.min.js"></script>
+            <script src="views/assets/plugins/daterangepicker/daterangepicker.js"></script>
+            <script src="views/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+            <script src="views/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+            <script src="views/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="views/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+            <script src="views/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="views/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+            <script src="views/assets/plugins/jszip/jszip.min.js"></script>
+            <script src="views/assets/plugins/pdfmake/pdfmake.min.js"></script>
+            <script src="views/assets/plugins/pdfmake/vfs_fonts.js"></script>
+            <script src="views/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+            <script src="views/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+            <script src="views/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+        <?php endif ?>
+
+    <?php endif ?>
+
+    <script src="views/assets/custom/alerts/alerts.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed text-sm sidebar-collapse layout-navbar-fixed">
     <?php
-
     if (!isset($_SESSION["admin"])) {
 
         include "views/pages/login/login.php";
@@ -57,6 +149,7 @@ foreach ($routesArray as $key => $value) {
 
         <!-- Site wrapper -->
         <div class="wrapper">
+
             <!-- Navbar -->
             <?php include "views/modules/navbar.php"; ?>
 
@@ -72,15 +165,7 @@ foreach ($routesArray as $key => $value) {
 
                     if (
                         $routesArray[1] == "admins" ||
-                        $routesArray[1] == "users" ||
-                        $routesArray[1] == "stores" ||
                         $routesArray[1] == "categories" ||
-                        $routesArray[1] == "subcategories" ||
-                        $routesArray[1] == "products" ||
-                        $routesArray[1] == "orders" ||
-                        $routesArray[1] == "sales" ||
-                        $routesArray[1] == "disputes" ||
-                        $routesArray[1] == "messages" ||
                         $routesArray[1] == "logout"
                     ) {
 
@@ -107,20 +192,9 @@ foreach ($routesArray as $key => $value) {
         </div>
         <!-- ./wrapper -->
 
-        <!-- jQuery -->
-        <script src="views/assets/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="views/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- overlayScrollbars -->
-        <script src="views/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="views/assets/plugins/adminlte/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="views/assets/plugins/adminlte/js/demo.js"></script>
-
-        <script src="views/assets/custom/forms/forms.js"></script>
-
     <?php endif ?>
+
+    <script src="views/assets/custom/forms/forms.js"></script>
 </body>
 
 </html>
