@@ -61,7 +61,6 @@ class AdminsController
 	=============================================*/
     public function create()
     {
-
         if (isset($_POST["displayname"])) {
             echo '<script>
 
@@ -179,8 +178,8 @@ class AdminsController
 
             echo '<script>
 
-                /* matPreloader("on");
-                fncSweetAlert("loading", "Loading...", ""); */
+                matPreloader("on");
+                fncSweetAlert("loading", "Loading...", "");
 
             </script>';
 
@@ -193,6 +192,7 @@ class AdminsController
                 $fields = array();
 
                 $response = CurlController::request($url, $method, $fields);
+
                 if ($response->status == 200) {
 
                     /*=============================================
@@ -238,33 +238,70 @@ class AdminsController
                         $pcmod_user = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                         $usmod_user = $_SESSION["admin"]->username_user;
 
-                        $data = array(
-
-                            "rol_user" => trim(strtolower($_POST["rol"])),
-                            "displayname_user" => trim(TemplateController::capitalize($_POST["displayname"])),
-                            "username_user" => trim(strtolower($_POST["username"])),
-                            "email_user" => trim(strtolower($_POST["email"])),
-                            "password_user" =>  $password,
-                            "picture_user" => $picture,
-                            "id_company_user" =>  trim($_POST["company"]),
-                            "pcmod_user" =>  $pcmod_user,
-                            "usmod_user" =>  $usmod_user
-
-                        );
-                        echo '<pre>';
-                        print_r($data);
-                        echo '</pre>';
+                        $data =  "rol_user=" . trim(strtolower($_POST["rol"])) . "&displayname_user=" . trim(TemplateController::capitalize($_POST["displayname"])) . "&username_user=" . trim(strtolower($_POST["username"])) . "&email_user=" . trim(strtolower($_POST["email"])) . "&password_user=" . $password . "&picture_user=" . $picture . "&id_company_user=" . trim($_POST["company"]) . "&pcmod_user=" . $pcmod_user . "&usmod_user=" . $usmod_user;
 
                         $url = "users?id=" . $id . "&nameId=id_user&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
                         $method = "PUT";
                         $fields = $data;
 
                         $response = CurlController::request($url, $method, $fields);
-                        echo '<pre>';
-                        print_r($response);
-                        echo '</pre>';
+                        /*=============================================
+						Respuesta de la API
+						=============================================*/
+
+                        if ($response->status == 200) {
+
+                            echo '<script>
+
+								fncFormatInputs();
+								matPreloader("off");
+								fncSweetAlert("close", "", "");
+								fncSweetAlert("success", "Your records were created successfully", "/admins");
+
+							</script>';
+                        } else {
+
+                            echo '<script>
+
+								fncFormatInputs();
+								matPreloader("off");
+								fncSweetAlert("close", "", "");
+								fncNotie(3, "Error editing the registry");
+
+							</script>';
+                        }
+                    } else {
+
+                        echo '<script>
+
+							fncFormatInputs();
+							matPreloader("off");
+							fncSweetAlert("close", "", "");
+							fncNotie(3, "Field syntax error");
+
+						</script>';
                     }
+                } else {
+
+                    echo '<script>
+
+						fncFormatInputs();
+						matPreloader("off");
+						fncSweetAlert("close", "", "");
+						fncNotie(3, "Error editing the registry");
+
+					</script>';
                 }
+            } else {
+
+                echo '<script>
+
+					fncFormatInputs();
+					matPreloader("off");
+					fncSweetAlert("close", "", "");
+					fncNotie(3, "Error editing the registry");
+
+				</script>';
             }
         }
     }

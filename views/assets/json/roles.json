@@ -1,10 +1,10 @@
 [
     {
-        "rol": "Administrador",
-        "name_rol": "Administrador"
+        "rol": "administrador",
+        "name_rol": "administrador"
     },
     {
-        "rol": "Vendedor",
-        "name_rol": "Vendedor"
+        "rol": "vendedor",
+        "name_rol": "vendedor"
     }
 ]

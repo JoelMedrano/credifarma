@@ -1,7 +1,64 @@
-var text = "html";
+var page;
 
 function execDatatable(text) {
-    var adminisTable = "";
+    /*=============================================
+Validamos tabla de administradores
+=============================================*/
+    if ($(".tableAdmins").length > 0) {
+        var url =
+            "ajax/admins/data-admins.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_user" },
+            {
+                data: "picture_user",
+                orderable: false,
+                search: false,
+                className: "text-center",
+            },
+            { data: "displayname_user" },
+            { data: "username_user" },
+            { data: "email_user" },
+            { data: "rol_user", className: "text-center" },
+            { data: "state_user", className: "text-center" },
+            { data: "ruc_company" },
+            { data: "name_company" },
+            { data: "city_company" },
+            { data: "date_created_user" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        page = "admins";
+    }
+
+    /*=============================================
+    Validamos tabla de categorias
+    =============================================*/
+    if ($(".tableCategories").length > 0) {
+        var url =
+            "ajax/categories/data-categories.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_category" },
+            { data: "code_category" },
+            { data: "name_category" },
+            { data: "group_category" },
+            { data: "date_created_category" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        page = "categories";
+    }
 
     adminsTable = $("#adminsTable").DataTable({
         responsive: true,
@@ -15,30 +72,10 @@ function execDatatable(text) {
         serverSide: true,
         order: [[0, "desc"]],
         ajax: {
-            url:
-                "ajax/data-admins.php?text=" +
-                text +
-                "&between1=" +
-                $("#between1").val() +
-                "&between2=" +
-                $("#between2").val() +
-                "&token=" +
-                localStorage.getItem("token_user"),
+            url: url,
             type: "POST",
         },
-        columns: [
-            { data: "id_user" },
-            { data: "picture_user", orderable: false, search: false },
-            { data: "displayname_user" },
-            { data: "username_user" },
-            { data: "email_user" },
-            { data: "state_user" },
-            { data: "ruc_company" },
-            { data: "name_company" },
-            { data: "city_company" },
-            { data: "date_created_user" },
-            { data: "actions", orderable: false },
-        ],
+        columns: columns,
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
@@ -98,6 +135,8 @@ function execDatatable(text) {
         });
     }
 }
+
+execDatatable("html");
 
 /*=============================================
 Ejecutar reporte 
@@ -166,33 +205,13 @@ $("#daterange-btn").daterangepicker(
                 moment().subtract(1, "year").endOf("year"),
             ],
         },
-        // ranges: {
-        //     Today: [moment(), moment()],
-        //     Yesterday: [
-        //         moment().subtract(1, "days"),
-        //         moment().subtract(1, "days"),
-        //     ],
-        //     "Last 7 Days": [moment().subtract(6, "days"), moment()],
-        //     "Last 30 Days": [moment().subtract(29, "days"), moment()],
-        //     "This Month": [moment().startOf("month"), moment().endOf("month")],
-        //     "Last Month": [
-        //         moment().subtract(1, "month").startOf("month"),
-        //         moment().subtract(1, "month").endOf("month"),
-        //     ],
-        //     "This Year": [moment().startOf("year"), moment().endOf("year")],
-        //     "last Year": [
-        //         moment().subtract(1, "year").startOf("year"),
-        //         moment().subtract(1, "year").endOf("year"),
-        //     ],
-        // },
-
         startDate: moment($("#between1").val()),
         endDate: moment($("#between2").val()),
     },
     function (start, end) {
         window.location =
-            //page +
-            "admins?start=" +
+            page +
+            "?start=" +
             start.format("YYYY-MM-DD") +
             "&end=" +
             end.format("YYYY-MM-DD");

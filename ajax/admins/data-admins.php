@@ -1,7 +1,7 @@
 <?php
 
-require_once "../controllers/curl.controller.php";
-require_once "../controllers/template.controller.php";
+require_once "../../controllers/curl.controller.php";
+require_once "../../controllers/template.controller.php";
 
 class DatatableController
 {
@@ -53,13 +53,13 @@ class DatatableController
            	Búsqueda de datos
             =============================================*/
 
-            $select = "id_user,picture_user,displayname_user,username_user,email_user,state_user,id_company_user,ruc_company,name_company,city_company,date_created_user";
+            $select = "id_user,picture_user,displayname_user,username_user,email_user,rol_user,state_user,id_company_user,ruc_company,name_company,city_company,date_created_user";
 
             if (!empty($_POST['search']['value'])) {
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["displayname_user", "username_user", "email_user", "ruc_company", "name_company", "city_company", "date_created_user"];
+                    $linkTo = ["displayname_user", "username_user", "email_user", "rol_user", "ruc_company", "name_company", "city_company", "date_created_user"];
 
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
@@ -128,21 +128,36 @@ class DatatableController
             foreach ($data as $key => $value) {
 
                 if ($_GET["text"] == "flat") {
+
                     $picture_user = $value->picture_user;
+                    $rol_user = $value->rol_user;
+                    $state_user = $value->state_user;
 
                     $actions = "";
                 } else {
+
                     $picture_user = "<img src='" . TemplateController::srcImg() . "views/img/users/" . $value->id_user . "/" . $value->picture_user . "' class='img-circle' style='width:40px'>";
 
-                    $actions = "<a href='/admins/edit/" . base64_encode($value->id_user . "~" . $_GET["token"]) . "' class='btn btn-warning btn-sm mr-1 rounded-circle'>
+
+                    if ($value->rol_user == "administrador") {
+
+                        $rol_user = "<span class='badge bg-navy'>Administrador</span>";
+                    } else {
+
+                        $rol_user = "<span class='badge bg-purple'>Vendedor</span>";
+                    }
+
+                    if ($value->state_user == "1") {
+
+                        $state_user = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_user . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                    } else {
+
+                        $state_user = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_user . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                    }
+
+                    $actions = "<a href='/admins/edit/" . base64_encode($value->id_user . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
 
                     <i class='fas fa-pencil-alt'></i>
-
-                    </a>
-
-                    <a class='btn btn-danger btn-sm rounded-circle removeItem' idItem='' table='users' suffix='user' deleteFile='users/" . $value->id_user . "/" . $value->picture_user . "' page='admins'>
-
-                    <i class='fas fa-trash'></i>
 
                     </a>";
 
@@ -152,7 +167,8 @@ class DatatableController
                 $displayname_user = $value->displayname_user;
                 $username_user = $value->username_user;
                 $email_user = $value->email_user;
-                $state_user = $value->state_user;
+                $rol_user = $rol_user;
+                $state_user = $state_user;
                 $ruc_company = $value->ruc_company;
                 $name_company = $value->name_company;
                 $city_company = $value->city_company;
@@ -165,6 +181,7 @@ class DatatableController
             		"displayname_user":"' . $displayname_user . '",
             		"username_user":"' . $username_user . '",
             		"email_user":"' . $email_user . '",
+                    "rol_user":"' . $rol_user . '",
             		"state_user":"' . $state_user . '",
             		"ruc_company":"' . $ruc_company . '",
                     "name_company":"' . $name_company . '",

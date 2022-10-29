@@ -41,7 +41,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="admins" class="nav-link <?php if ($routesArray[1] == "admins") : ?>active<?php endif ?>">
+                    <a href="admins" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "admins") : ?>active<?php endif ?>">
                         <i class="nav-icon fas fa-tasks"></i>
                         <p>
                             Admins
@@ -50,84 +50,22 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/users" class="nav-link <?php if ($routesArray[1] == "users") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-users"></i>
+                    <a href="#" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "categories") : ?>active<?php endif ?>">
+                        <i class="nav-icon fas fa-medkit"></i>
                         <p>
-                            Users
+                            Artículos
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                </li>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="categories" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "categories") : ?>active<?php endif ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Categorias</p>
+                            </a>
+                        </li>
 
-                <li class="nav-item">
-                    <a href="/stores" class="nav-link <?php if ($routesArray[1] == "stores") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-store"></i>
-                        <p>
-                            Stores
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/categories" class="nav-link <?php if ($routesArray[1] == "categories") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p>
-                            Categories
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/subcategories" class="nav-link <?php if ($routesArray[1] == "subcategories") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Sub-Categories
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/products" class="nav-link <?php if ($routesArray[1] == "products") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-shopping-bag"></i>
-                        <p>
-                            Products
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/orders" class="nav-link <?php if ($routesArray[1] == "orders") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-shopping-basket"></i>
-                        <p>
-                            Orders
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/sales" class="nav-link <?php if ($routesArray[1] == "sales") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-shopping-cart"></i>
-                        <p>
-                            Sales
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/disputes" class="nav-link <?php if ($routesArray[1] == "disputes") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-comment-alt"></i>
-                        <p>
-                            Disputes
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/messages" class="nav-link <?php if ($routesArray[1] == "messages") : ?>active<?php endif ?>">
-                        <i class="nav-icon fas fa-comments"></i>
-                        <p>
-                            Messages
-                        </p>
-                    </a>
+                    </ul>
                 </li>
 
             </ul>

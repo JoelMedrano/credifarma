@@ -53,7 +53,7 @@ function validateJS(event, type) {
 
     if (type == "regex")
         pattern =
-            /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\"\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/;
+            /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/;
 
     if (type == "icon") {
         pattern =
@@ -171,25 +171,37 @@ function validateRepeat(event, type, table, suffix) {
         cache: false,
         processData: false,
         success: function (response) {
-            if (response == 200) {
+            if (response == "200") {
                 event.target.value = "";
                 $(event.target).parent().addClass("was-validated");
                 $(event.target)
                     .parent()
                     .children(".invalid-feedback")
-                    .html("the data written already exists in the database");
+                    .html("Ya existe en la base de datos");
             } else {
                 validateJS(event, type);
-
-                if (
-                    table == "categories" ||
-                    table == "subcategories" ||
-                    table == "stores" ||
-                    table == "products"
-                ) {
-                    createUrl(event, "url-" + suffix);
-                }
             }
         },
     });
+}
+
+/*=============================================
+Función para crear Url's
+=============================================*/
+function createUrl(event, name) {
+    var value = event.target.value;
+    value = value.toLowerCase();
+    value = value.replace(
+        /[#\\;\\$\\&\\%\\=\\(\\)\\:\\,\\.\\¿\\¡\\!\\?\\]/g,
+        ""
+    );
+    value = value.replace(/[ ]/g, "-");
+    value = value.replace(/[á]/g, "a");
+    value = value.replace(/[é]/g, "e");
+    value = value.replace(/[í]/g, "i");
+    value = value.replace(/[ó]/g, "o");
+    value = value.replace(/[ú]/g, "u");
+    value = value.replace(/[ñ]/g, "n");
+
+    $('[name="' + name + '"]').val(value);
 }

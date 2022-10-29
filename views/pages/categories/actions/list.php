@@ -19,7 +19,7 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
     <div class="card-header">
 
         <h3 class="card-title">
-            <a class="btn bg-dark btn-sm" href="/admins/new">New Admin</a>
+            <a class="btn bg-dark btn-sm" href="/categories/new">Nueva Categoria</a>
         </h3>
 
         <div class="card-tools">
@@ -27,7 +27,7 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
             <div class="d-flex">
 
                 <div class="d-flex mr-2">
-                    <span class="mr-2">Reports</span>
+                    <span class="mr-2">Reportes</span>
                     <input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="light" data-on-color="dark" data-size="mini" data-handle-width="70" onchange="reportActive(event)">
                 </div>
 
@@ -46,19 +46,13 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <table id="adminsTable" class="table table-bordered table-striped tableAdmins">
+        <table id="adminsTable" class="table table-bordered table-striped tableCategories">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Imagen</th>
+                    <th>Codigo</th>
                     <th>Nombre</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Rol</th>
-                    <th>Estado</th>
-                    <th>Ruc</th>
-                    <th>Sucursal</th>
-                    <th>Ciudad</th>
+                    <th>Grupo</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>
@@ -71,4 +65,8 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
 
 
 <script src="views/assets/custom/datatable/datatable.js"></script>
-<script src="views/pages/admins/admins.js"></script>
+<script src="views/pages/categories/categories.js"></script>
+
+<script>
+    window.document.title = "Categorias"
+</script>

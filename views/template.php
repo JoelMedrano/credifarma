@@ -165,15 +165,7 @@ foreach ($routesArray as $key => $value) {
 
                     if (
                         $routesArray[1] == "admins" ||
-                        $routesArray[1] == "users" ||
-                        $routesArray[1] == "stores" ||
                         $routesArray[1] == "categories" ||
-                        $routesArray[1] == "subcategories" ||
-                        $routesArray[1] == "products" ||
-                        $routesArray[1] == "orders" ||
-                        $routesArray[1] == "sales" ||
-                        $routesArray[1] == "disputes" ||
-                        $routesArray[1] == "messages" ||
                         $routesArray[1] == "logout"
                     ) {
 
