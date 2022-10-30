@@ -2,8 +2,8 @@ var page;
 
 function execDatatable(text) {
     /*=============================================
-Validamos tabla de administradores
-=============================================*/
+    Validamos tabla de administradores
+    =============================================*/
     if ($(".tableAdmins").length > 0) {
         var url =
             "ajax/admins/data-admins.php?text=" +
@@ -58,6 +58,35 @@ Validamos tabla de administradores
             { data: "actions", orderable: false, className: "text-center" },
         ];
         page = "categories";
+    }
+
+    /*=============================================
+    Validamos tabla de laboratorios
+    =============================================*/
+    if ($(".tableLaboratories").length > 0) {
+        var url =
+            "ajax/laboratories/data-laboratories.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_laboratory" },
+            { data: "code_laboratory" },
+            { data: "ruc_laboratory" },
+            { data: "bussiness_name_laboratory" },
+            { data: "name_laboratory" },
+            { data: "phone1_laboratory" },
+            { data: "email_laboratory" },
+            { data: "contact_laboratory" },
+            { data: "state_laboratory" },
+            { data: "date_created_laboratory" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        page = "laboratories";
     }
 
     adminsTable = $("#adminsTable").DataTable({

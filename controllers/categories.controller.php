@@ -41,10 +41,8 @@ class CategoriesController
                 $fields = $data;
 
                 $response = CurlController::request($url, $method, $fields);
-                /*=============================================
-				Respuesta de la API
-				=============================================*/
 
+                //*Respuesta de la API
                 if ($response->status == 200) {
                     echo '<script>
 
@@ -111,7 +109,6 @@ class CategoriesController
                         $pcmod_category = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                         $usmod_category = $_SESSION["admin"]->username_user;
 
-
                         $data = "code_category=" . trim(strtoupper($_POST["codigo"])) . "&name_category=" . trim(TemplateController::capitalize($_POST["nombre"])) . "&group_category=" . trim(strtoupper($_POST["grupo"])) . "&pcmod_category=" .  $pcmod_category . "&usmod_category=" .  $usmod_category;
 
                         //*Solicitud a la API
@@ -164,6 +161,16 @@ class CategoriesController
 
 					</script>';
                 }
+            } else {
+
+                echo '<script>
+
+					fncFormatInputs();
+					matPreloader("off");
+					fncSweetAlert("close", "", "");
+					fncNotie(3, "Error editing the registry");
+
+				</script>';
             }
         }
     }
