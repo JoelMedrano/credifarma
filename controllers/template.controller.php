@@ -76,7 +76,6 @@ class TemplateController
     /*=============================================
 	Función para almacenar imágenes
 	=============================================*/
-
     static public function saveImage($image, $folder, $type, $width, $height, $name)
     {
 
@@ -179,6 +178,18 @@ class TemplateController
         } else {
 
             return "error";
+        }
+    }
+
+    /*=============================================
+	Función para buscar por RUC y DNI
+	=============================================*/
+    static public function consultaDatos($tipo, $documento)
+    {
+        if ($tipo == "DNI") {
+            $response = CurlController::consultaDNI($documento);
+        } else {
+            $response = CurlController::consultaRUC($documento);
         }
     }
 }

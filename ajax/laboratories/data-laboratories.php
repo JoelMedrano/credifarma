@@ -8,13 +8,8 @@ class DatatableController
     public function data()
     {
         if (!empty($_POST)) {
-            /* echo '<pre>';
-            print_r($_POST);
-            echo '</pre>'; */
 
-            /*=============================================
-            Capturando y organizando las variables POST de DT
-            =============================================*/
+            //*Capturando y organizando las variables POST de DT
             $draw = $_POST["draw"]; //Contador utilizado por DataTables para garantizar que los retornos de Ajax de las solicitudes de procesamiento del lado del servidor sean dibujados en secuencia por DataTables 
 
             $orderByColumnIndex = $_POST['order'][0]['column']; //Índice de la columna de clasificación (0 basado en el índice, es decir, 0 es el primer registro)
@@ -30,7 +25,7 @@ class DatatableController
             /*=============================================
             El total de registros de la data
             =============================================*/
-            $url = "categories?select=id_category&linkTo=date_created_category&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "";
+            $url = "laboratories?select=id_laboratory&linkTo=date_created_laboratory&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "";
 
             $method = "GET";
             $fields = array();
@@ -47,23 +42,20 @@ class DatatableController
                 return;
             }
 
-            /*=============================================
-           	Búsqueda de datos
-            =============================================*/
-
-            $select = "id_category,code_category,name_category,group_category,date_created_category";
+            //*Búsqueda de datos
+            $select = "id_laboratory,code_laboratory,ruc_laboratory,bussiness_name_laboratory,name_laboratory,address_laboratory,postal_code_laboratory,phone1_laboratory,phone2_laboratory,fax_laboratory,email_laboratory,ceo_laboratory,contact_laboratory,state_laboratory,date_created_laboratory";
 
             if (!empty($_POST['search']['value'])) {
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["code_category", "name_category", "group_category", "date_created_user"];
+                    $linkTo = ["code_laboratory", "ruc_laboratory", "bussiness_name_laboratory", "name_laboratory", "email_laboratory", "contact_laboratory", "date_created_laboratory"];
 
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
                     foreach ($linkTo as $key => $value) {
 
-                        $url = "categories?select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                        $url = "laboratories?select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                         $data = CurlController::request($url, $method, $fields)->results;
 
@@ -82,25 +74,18 @@ class DatatableController
                 } else {
 
                     echo '{"data": []}';
-
-                    return;
                 }
             } else {
 
-                /*=============================================
-                Seleccionar datos
-                =============================================*/
-                $url = "categories?select=" . $select . "&linkTo=date_created_category&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                //*Seleccionar datos
+                $url = "laboratories?select=" . $select . "&linkTo=date_created_laboratory&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                 $data = CurlController::request($url, $method, $fields)->results;
 
                 $recordsFiltered = $totalData;
             }
 
-            /*=============================================
-            Cuando la data viene vacía
-            =============================================*/
-
+            //*Cuando la data viene vacía
             if (empty($data)) {
 
                 echo '{"data": []}';
@@ -108,10 +93,7 @@ class DatatableController
                 return;
             }
 
-            /*=============================================
-            Construimos el dato JSON a regresar
-            =============================================*/
-
+            //*Construimos el dato JSON a regresar
             $dataJson = '{
 
             	"Draw": ' . intval($draw) . ',
@@ -119,10 +101,7 @@ class DatatableController
             	"recordsFiltered": ' . $recordsFiltered . ',
             	"data": [';
 
-            /*=============================================
-            Recorremos la data
-            =============================================*/
-
+            //*Recorremos la data
             foreach ($data as $key => $value) {
 
                 if ($_GET["text"] == "flat") {
@@ -130,7 +109,15 @@ class DatatableController
                     $actions = "";
                 } else {
 
-                    $actions = "<a href='/categories/edit/" . base64_encode($value->id_category . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
+                    if ($value->state_laboratory == "1") {
+
+                        $state_laboratory = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_laboratory . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                    } else {
+
+                        $state_laboratory = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_laboratory . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                    }
+
+                    $actions = "<a href='/laboratories/edit/" . base64_encode($value->id_laboratory . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
 
                     <i class='fas fa-pencil-alt'></i>
 
@@ -139,18 +126,28 @@ class DatatableController
                     $actions = TemplateController::htmlClean($actions);
                 }
 
-                $code_category = $value->code_category;
-                $name_category = $value->name_category;
-                $group_category = $value->group_category;
-                $date_created_category = $value->date_created_category;
+                $code_laboratory = $value->code_laboratory;
+                $ruc_laboratory = $value->ruc_laboratory;
+                $bussiness_name_laboratory = $value->bussiness_name_laboratory;
+                $name_laboratory = $value->name_laboratory;
+                $phone1_laboratory = $value->phone1_laboratory;
+                $email_laboratory = $value->email_laboratory;
+                $contact_laboratory = $value->contact_laboratory;
+                $state_laboratory = $state_laboratory;
+                $date_created_laboratory = $value->date_created_laboratory;
 
                 $dataJson .= '{ 
 
-            		"id_category":"' . ($start + $key + 1) . '",
-            		"code_category":"' . $code_category . '",
-            		"name_category":"' . $name_category . '",
-            		"group_category":"' . $group_category . '",
-            		"date_created_category":"' . $date_created_category . '",
+            		"id_laboratory":"' . ($start + $key + 1) . '",
+            		"code_laboratory":"' . $code_laboratory . '",
+            		"ruc_laboratory":"' . $ruc_laboratory . '",
+            		"bussiness_name_laboratory":"' . $bussiness_name_laboratory . '",
+                    "name_laboratory":"' . $name_laboratory . '",
+                    "phone1_laboratory":"' . $phone1_laboratory . '",
+                    "email_laboratory":"' . $email_laboratory . '",
+                    "contact_laboratory":"' . $contact_laboratory . '",
+                    "state_laboratory":"' . $state_laboratory . '",
+            		"date_created_laboratory":"' . $date_created_laboratory . '",
             		"actions":"' . $actions . '"
 
             	},';
