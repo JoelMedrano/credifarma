@@ -5,3 +5,7 @@ id_laboratory,code_laboratory,ruc_laboratory,bussiness_name_laboratory,name_labo
 # Tabla terapias
 
 id_therapy,code_therapy,name_therapy,state_therapy,pcreg_therapy,usreg_therapy,pcmod_therapy,usmod_therapy,date_created_therapy,date_updated_therapy
+
+# tabla sustancias
+
+id_substance,code_substance,name_substance,vadecum_substance,vadecumb_substance,state_substance,pcreg_substance,usreg_substance,pcmod_substance,usmod_substance,date_created_substance,date_updated_substance

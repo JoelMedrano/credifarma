@@ -113,6 +113,30 @@ function execDatatable(text) {
         page = "therapies";
     }
 
+    /*=============================================
+    Validamos tabla de terapias
+    =============================================*/
+    if ($(".tableSubstances").length > 0) {
+        var url =
+            "ajax/substances/data-substances.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_substance" },
+            { data: "code_substance" },
+            { data: "name_substance" },
+            { data: "state_substance" },
+            { data: "date_created_substance" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        page = "substances";
+    }
+
     adminsTable = $("#adminsTable").DataTable({
         responsive: true,
         lengthChange: true,

@@ -81,6 +81,14 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="substances" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "substances") : ?>active<?php endif ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sustancia Activa</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
             </ul>

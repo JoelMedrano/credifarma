@@ -24,6 +24,7 @@ foreach ($routesArray as $key => $value) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
     <title>Credifarma</title>
 
     <base href="<?php echo TemplateController::path() ?>">
@@ -95,7 +96,8 @@ foreach ($routesArray as $key => $value) {
             $routesArray[1] == "admins" ||
             $routesArray[1] == "categories" ||
             $routesArray[1] == "laboratories" ||
-            $routesArray[1] == "therapies"
+            $routesArray[1] == "therapies" ||
+            $routesArray[1] == "substances"
 
         ) : ?>
 
@@ -163,6 +165,7 @@ foreach ($routesArray as $key => $value) {
                         $routesArray[1] == "categories" ||
                         $routesArray[1] == "laboratories" ||
                         $routesArray[1] == "therapies" ||
+                        $routesArray[1] == "substances" ||
                         $routesArray[1] == "logout"
                     ) {
 
