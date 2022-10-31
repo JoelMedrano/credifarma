@@ -1,8 +1,8 @@
 <?php
 
-$select = "code_therapy";
+$select = "code_substance";
 
-$url = "therapies?select=" . $select . "&orderBy=code_therapy&orderMode=DESC&startAt=0&endAt=1";
+$url = "substances?select=" . $select . "&orderBy=code_substance&orderMode=DESC&startAt=0&endAt=1";
 $method = "GET";
 $fields = array();
 
@@ -12,7 +12,7 @@ $tamaño = 4;
 
 if ($response->status == 200) {
     $code = $response->results[0];
-    $maxCode = str_pad($code->code_therapy + 1, $tamaño, '0', STR_PAD_LEFT);
+    $maxCode = str_pad($code->code_substance + 1, $tamaño, '0', STR_PAD_LEFT);
 } else {
     $maxCode = str_pad('1', $tamaño, '0', STR_PAD_LEFT);
 }
@@ -27,9 +27,9 @@ if ($response->status == 200) {
 
             <?php
 
-            require_once "controllers/therapies.controller.php";
+            require_once "controllers/substances.controller.php";
 
-            $create = new TherapiesController();
+            $create = new SubstancesController();
             $create->create();
 
             ?>
@@ -44,7 +44,7 @@ if ($response->status == 200) {
 
                         <label>Código</label>
 
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}" onchange="validateRepeat(event,'regex','therapies','code_therapy')" name="codigo" value="<?php echo $maxCode ?>" required readonly>
+                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','substances','code_substance')" name="codigo" value="<?php echo $maxCode ?>" required readonly>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -58,7 +58,21 @@ if ($response->status == 200) {
 
                         <label>Nombre</label>
 
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}" onchange="validateRepeat(event,'regex','therapies','name_therapy')" name="nombre" required>
+                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateJS(event,'regex')" name="nombre" required>
+
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+
+                    </div>
+
+                    <!--=====================================
+                    Vadecum
+                    ======================================-->
+                    <div class="col-lg-12 form-group">
+
+                        <label>Vadecum</label>
+
+                        <textarea type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateJS(event,'regex')" name="vadecum"></textarea>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -78,7 +92,7 @@ if ($response->status == 200) {
 
                 <div class="form-group mt-3">
 
-                    <a href="/therapies" class="btn btn-light border text-left">Back</a>
+                    <a href="/substances" class="btn btn-light border text-left">Back</a>
 
                     <button type="submit" class="btn bg-dark float-right">Save</button>
 
@@ -94,5 +108,5 @@ if ($response->status == 200) {
 </div>
 
 <script>
-    window.document.title = "Terapias - Nueva"
+    window.document.title = "Sustancias - Nueva"
 </script>

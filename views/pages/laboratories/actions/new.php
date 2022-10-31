@@ -8,9 +8,10 @@ $fields = array();
 
 $response = CurlController::request($url, $method, $fields);
 
+$tamaño = 4;
+
 if ($response->status == 200) {
     $code = $response->results[0];
-    $tamaño = 4;
     $maxCode = str_pad($code->code_laboratory + 1, $tamaño, '0', STR_PAD_LEFT);
 } else {
     $maxCode = str_pad('1', $tamaño, '0', STR_PAD_LEFT);
