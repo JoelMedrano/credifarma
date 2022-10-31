@@ -65,7 +65,7 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
 
 
 <script src="views/assets/custom/datatable/datatable.js"></script>
-<script src="views/pages/categories/categories.js"></script>
+<script src="views/pages/substances/substances.js"></script>
 
 <script>
     window.document.title = "Sustancias"

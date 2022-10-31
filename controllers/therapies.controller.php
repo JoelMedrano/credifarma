@@ -101,6 +101,7 @@ class TherapiesController
                         preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["codigo"]) &&
                         preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["nombre"])
                     ) {
+
                         //*Agrupamos la información 
                         $pcmod_therapy = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                         $udmod_therapy = $_SESSION["admin"]->username_user;
