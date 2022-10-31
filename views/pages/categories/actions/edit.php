@@ -81,8 +81,9 @@ if (isset($routesArray[3])) {
                         <div class="invalid-feedback">Please fill out this field.</div>
 
                     </div>
+
                     <!--=====================================
-                    Codigo
+                    Grupo
                     ======================================-->
                     <div class="col-lg-2 form-group">
 
@@ -107,7 +108,7 @@ if (isset($routesArray[3])) {
 
                 <div class="form-group mt-3">
 
-                    <a href="/admins" class="btn btn-light border text-left">Back</a>
+                    <a href="/categories" class="btn btn-light border text-left">Back</a>
 
                     <button type="submit" class="btn bg-dark float-right">Save</button>
 

@@ -1,11 +1,12 @@
 <?php
 
-class CategoriesController
+class TherapiesController
 {
 
-    //*Crear categorias
+    //*Crear terapias
     public function create()
     {
+
         if (isset($_POST["codigo"])) {
             echo '<script>
 
@@ -15,28 +16,25 @@ class CategoriesController
 			</script>';
             if (
                 preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["codigo"]) &&
-                preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["nombre"]) &&
-                preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["grupo"])
+                preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["nombre"])
 
             ) {
-
                 //*Agrupamos la información 
-                $pcreg_category = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                $usreg_category = $_SESSION["admin"]->username_user;
+                $pcreg_therapy = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                $usreg_therapy = $_SESSION["admin"]->username_user;
 
                 $data = array(
 
-                    "code_category" => trim(strtoupper($_POST["codigo"])),
-                    "name_category" => trim(TemplateController::capitalize($_POST["nombre"])),
-                    "group_category" => trim(strtoupper($_POST["grupo"])),
-                    "pcreg_category" =>  $pcreg_category,
-                    "usreg_category" =>  $usreg_category,
-                    "date_created_category" => date("Y-m-d")
+                    "code_therapy" => trim(strtoupper($_POST["codigo"])),
+                    "name_therapy" => trim(strtoupper($_POST["nombre"])),
+                    "pcreg_therapy" =>  $pcreg_therapy,
+                    "usreg_therapy" =>  $usreg_therapy,
+                    "date_created_therapy" => date("Y-m-d")
 
                 );
 
                 //*Solicitud a la API
-                $url = "categories?token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+                $url = "therapies?token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
                 $method = "POST";
                 $fields = $data;
 
@@ -49,7 +47,7 @@ class CategoriesController
                         fncFormatInputs();
                         matPreloader("off");
                         fncSweetAlert("close", "", "");
-                        fncSweetAlert("success", "Your records were created successfully", "/categories");
+                        fncSweetAlert("success", "Your records were created successfully", "/therapies");
 
                     </script>';
                 } else {
@@ -76,10 +74,10 @@ class CategoriesController
         }
     }
 
-    //*Editar categorias
+    //*Editar terapias
     public function edit($id)
     {
-        if (isset($_POST["idCategory"])) {
+        if (isset($_POST["idTherapy"])) {
 
             echo '<script>
 
@@ -88,11 +86,11 @@ class CategoriesController
 
             </script>';
 
-            if ($id == $_POST["idCategory"]) {
+            if ($id == $_POST["idTherapy"]) {
 
-                $select = "id_category";
+                $select = "id_therapy";
 
-                $url = "categories?select=" . $select . "&linkTo=id_category&equalTo=" . $id;
+                $url = "therapies?select=" . $select . "&linkTo=id_therapy&equalTo=" . $id;
                 $method = "GET";
                 $fields = array();
 
@@ -101,18 +99,20 @@ class CategoriesController
                 if ($response->status == 200) {
                     if (
                         preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["codigo"]) &&
-                        preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["nombre"]) &&
-                        preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["grupo"])
+                        preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}$/', $_POST["nombre"])
                     ) {
-
                         //*Agrupamos la información 
-                        $pcmod_category = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                        $usmod_category = $_SESSION["admin"]->username_user;
+                        $pcmod_therapy = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                        $udmod_therapy = $_SESSION["admin"]->username_user;
 
-                        $data = "code_category=" . trim(strtoupper($_POST["codigo"])) . "&name_category=" . trim(TemplateController::capitalize($_POST["nombre"])) . "&group_category=" . trim(strtoupper($_POST["grupo"])) . "&pcmod_category=" .  $pcmod_category . "&usmod_category=" .  $usmod_category;
+                        $data =
+                            "code_therapy=" . trim(strtoupper($_POST["codigo"])) .
+                            "&name_therapy=" . trim(strtoupper($_POST["nombre"])) .
+                            "&pcmod_therapy=" .  $pcmod_therapy .
+                            "&usmod_therapy=" .  $udmod_therapy;
 
                         //*Solicitud a la API
-                        $url = "categories?id=" . $id . "&nameId=id_category&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+                        $url = "therapies?id=" . $id . "&nameId=id_therapy&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
                         $method = "PUT";
                         $fields = $data;
 
@@ -123,22 +123,22 @@ class CategoriesController
 
                             echo '<script>
 
-								fncFormatInputs();
-								matPreloader("off");
-								fncSweetAlert("close", "", "");
-								fncSweetAlert("success", "Your records were created successfully", "/categories");
+                                fncFormatInputs();
+                                matPreloader("off");
+                                fncSweetAlert("close", "", "");
+                                fncSweetAlert("success", "Your records were created successfully", "/therapies");
 
-							</script>';
+                            </script>';
                         } else {
 
                             echo '<script>
 
-								fncFormatInputs();
-								matPreloader("off");
-								fncSweetAlert("close", "", "");
-								fncNotie(3, "Error editing the registry");
+                                fncFormatInputs();
+                                matPreloader("off");
+                                fncSweetAlert("close", "", "");
+                                fncNotie(3, "Error editing the registry");
 
-							</script>';
+                            </script>';
                         }
                     } else {
                         echo '<script>

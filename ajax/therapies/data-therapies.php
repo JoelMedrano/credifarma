@@ -8,6 +8,9 @@ class DatatableController
     public function data()
     {
         if (!empty($_POST)) {
+            /* echo '<pre>';
+            print_r($_POST);
+            echo '</pre>'; */
 
             //*Capturando y organizando las variables POST de DT
             $draw = $_POST["draw"]; //Contador utilizado por DataTables para garantizar que los retornos de Ajax de las solicitudes de procesamiento del lado del servidor sean dibujados en secuencia por DataTables 
@@ -22,10 +25,8 @@ class DatatableController
 
             $length = $_POST['length']; //Indicador de la longitud de la paginación.
 
-            /*=============================================
-            El total de registros de la data
-            =============================================*/
-            $url = "laboratories?select=id_laboratory&linkTo=date_created_laboratory&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "";
+            //*El total de registros de la data
+            $url = "therapies?select=id_therapy&linkTo=date_created_therapy&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "";
 
             $method = "GET";
             $fields = array();
@@ -43,19 +44,19 @@ class DatatableController
             }
 
             //*Búsqueda de datos
-            $select = "id_laboratory,code_laboratory,ruc_laboratory,bussiness_name_laboratory,name_laboratory,address_laboratory,postal_code_laboratory,phone1_laboratory,phone2_laboratory,fax_laboratory,email_laboratory,ceo_laboratory,contact_laboratory,state_laboratory,date_created_laboratory";
+            $select = "id_therapy,code_therapy,name_therapy,state_therapy,date_created_therapy";
 
             if (!empty($_POST['search']['value'])) {
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["code_laboratory", "ruc_laboratory", "bussiness_name_laboratory", "name_laboratory", "email_laboratory", "contact_laboratory", "date_created_laboratory"];
+                    $linkTo = ["code_therapy", "name_therapy", "date_created_therapy"];
 
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
                     foreach ($linkTo as $key => $value) {
 
-                        $url = "laboratories?select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                        $url = "therapies?select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                         $data = CurlController::request($url, $method, $fields)->results;
 
@@ -74,11 +75,13 @@ class DatatableController
                 } else {
 
                     echo '{"data": []}';
+
+                    return;
                 }
             } else {
 
                 //*Seleccionar datos
-                $url = "laboratories?select=" . $select . "&linkTo=date_created_laboratory&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                $url = "therapies?select=" . $select . "&linkTo=date_created_therapy&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                 $data = CurlController::request($url, $method, $fields)->results;
 
@@ -106,20 +109,20 @@ class DatatableController
 
                 if ($_GET["text"] == "flat") {
 
-                    $state_laboratory = $value->state_laboratory;
+                    $state_therapy = $value->state_therapy;
 
                     $actions = "";
                 } else {
 
-                    if ($value->state_laboratory == "1") {
+                    if ($value->state_therapy == "1") {
 
-                        $state_laboratory = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_laboratory . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        $state_therapy = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_therapy . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
                     } else {
 
-                        $state_laboratory = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_laboratory . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        $state_therapy = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_therapy . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
                     }
 
-                    $actions = "<a href='/laboratories/edit/" . base64_encode($value->id_laboratory . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
+                    $actions = "<a href='/therapies/edit/" . base64_encode($value->id_therapy . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
 
                     <i class='fas fa-pencil-alt'></i>
 
@@ -128,28 +131,18 @@ class DatatableController
                     $actions = TemplateController::htmlClean($actions);
                 }
 
-                $code_laboratory = $value->code_laboratory;
-                $ruc_laboratory = $value->ruc_laboratory;
-                $bussiness_name_laboratory = $value->bussiness_name_laboratory;
-                $name_laboratory = $value->name_laboratory;
-                $phone1_laboratory = $value->phone1_laboratory;
-                $email_laboratory = $value->email_laboratory;
-                $contact_laboratory = $value->contact_laboratory;
-                $state_laboratory = $state_laboratory;
-                $date_created_laboratory = $value->date_created_laboratory;
+                $code_therapy = $value->code_therapy;
+                $name_therapy = $value->name_therapy;
+                $state_therapy = $state_therapy;
+                $date_created_therapy = $value->date_created_therapy;
 
                 $dataJson .= '{ 
 
-            		"id_laboratory":"' . ($start + $key + 1) . '",
-            		"code_laboratory":"' . $code_laboratory . '",
-            		"ruc_laboratory":"' . $ruc_laboratory . '",
-            		"bussiness_name_laboratory":"' . $bussiness_name_laboratory . '",
-                    "name_laboratory":"' . $name_laboratory . '",
-                    "phone1_laboratory":"' . $phone1_laboratory . '",
-                    "email_laboratory":"' . $email_laboratory . '",
-                    "contact_laboratory":"' . $contact_laboratory . '",
-                    "state_laboratory":"' . $state_laboratory . '",
-            		"date_created_laboratory":"' . $date_created_laboratory . '",
+            		"id_therapy":"' . ($start + $key + 1) . '",
+            		"code_therapy":"' . $code_therapy . '",
+            		"name_therapy":"' . $name_therapy . '",
+                    "state_therapy":"' . $state_therapy . '",
+            		"date_created_therapy":"' . $date_created_therapy . '",
             		"actions":"' . $actions . '"
 
             	},';
