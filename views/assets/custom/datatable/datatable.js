@@ -89,6 +89,30 @@ function execDatatable(text) {
         page = "laboratories";
     }
 
+    /*=============================================
+    Validamos tabla de terapias
+    =============================================*/
+    if ($(".tableTherapies").length > 0) {
+        var url =
+            "ajax/therapies/data-therapies.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_therapy" },
+            { data: "code_therapy" },
+            { data: "name_therapy" },
+            { data: "state_therapy" },
+            { data: "date_created_therapy" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        page = "therapies";
+    }
+
     adminsTable = $("#adminsTable").DataTable({
         responsive: true,
         lengthChange: true,
