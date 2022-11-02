@@ -315,7 +315,7 @@ $companies = $companiesData->results;
                     ======================================-->
                     <div class="col-lg-4 form-group">
 
-                        <label>Cod. Digemin</label>
+                        <label>Cod. Digemid</label>
 
                         <input type="text" class="form-control" pattern="[0-9A-Za-zñÑáéíóúÁÉÍÓÚ ]{1,50}" onchange="validateJS(event,'text&number')" name="digemid">
 

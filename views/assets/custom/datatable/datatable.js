@@ -162,6 +162,38 @@ function execDatatable(text) {
         page = "substances";
     }
 
+    /*=============================================
+    Validamos tabla de articles
+    =============================================*/
+    if ($(".tableArticles").length > 0) {
+        var url =
+            "ajax/articles/data-articles.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_article" },
+            { data: "code_article" },
+            { data: "name_article" },
+            { data: "name_category" },
+            { data: "name_laboratory" },
+            { data: "prescription_article", className: "text-center" },
+            { data: "state_article", className: "text-center" },
+            { data: "date_created_article" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
+        page = "articles";
+    }
+
     adminsTable = $("#adminsTable").DataTable({
         responsive: true,
         lengthChange: true,

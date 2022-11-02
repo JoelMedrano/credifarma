@@ -1,7 +1,8 @@
-[01-Nov-2022 23:39:59 America/Lima] PHP Notice:  Undefined index: switch1 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 79
-[01-Nov-2022 23:45:00 America/Lima] PHP Notice:  Undefined offset: 0 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 86
-[01-Nov-2022 23:45:00 America/Lima] PHP Notice:  Undefined offset: 0 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 86
-[01-Nov-2022 23:45:00 America/Lima] PHP Notice:  Undefined offset: 0 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 86
-[01-Nov-2022 23:48:22 America/Lima] PHP Notice:  Undefined index: switch2 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 71
-[01-Nov-2022 23:59:53 America/Lima] PHP Notice:  Trying to get property 'lastId' of non-object in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 79
-[01-Nov-2022 23:59:53 America/Lima] PHP Notice:  Trying to get property 'lastId' of non-object in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 79
+[02-Nov-2022 16:55:00 America/Lima] PHP Notice:  Undefined variable: article in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 185
+[02-Nov-2022 16:55:00 America/Lima] PHP Notice:  Trying to get property 'id_article' of non-object in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 185
+[02-Nov-2022 17:09:59 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:09:59 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:09:59 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:10:23 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:10:24 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:10:24 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215

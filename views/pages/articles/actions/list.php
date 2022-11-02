@@ -51,12 +51,10 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
                 <tr>
                     <th>#</th>
                     <th>Codigo</th>
-                    <th>RUC</th>
-                    <th>Razón Social</th>
                     <th>Nombre</th>
-                    <th>Telefono1</th>
-                    <th>E-mail</th>
-                    <th>Contacto</th>
+                    <th>Categoria</th>
+                    <th>Laboratorio</th>
+                    <th>Prescripción</th>
                     <th>Estado</th>
                     <th>Date</th>
                     <th>Actions</th>

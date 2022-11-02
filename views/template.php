@@ -33,7 +33,7 @@ foreach ($routesArray as $key => $value) {
     <!-- Google Font: Source Sans Pro -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,700;1,400&display=fallback">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="views/assets/plugins/fontawesome-free/css/all.min.css">
@@ -90,6 +90,11 @@ foreach ($routesArray as $key => $value) {
 
         .dataTables_filter input {
             width: 300px !important
+        }
+
+        .dataTables_wrapper {
+            font-family: Verdana;
+            font-size: 12px;
         }
     </style>
 
