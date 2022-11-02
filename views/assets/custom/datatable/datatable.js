@@ -33,6 +33,11 @@ function execDatatable(text) {
             { data: "date_created_user" },
             { data: "actions", orderable: false, className: "text-center" },
         ];
+        var order = [[0, "asc"]];
+        var aLengthMenu = [
+            [10, 50, 100, 500, 1000],
+            [10, 50, 100, 500, 1000],
+        ];
         page = "admins";
     }
 
@@ -56,6 +61,11 @@ function execDatatable(text) {
             { data: "group_category" },
             { data: "date_created_category" },
             { data: "actions", orderable: false, className: "text-center" },
+        ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
         ];
         page = "categories";
     }
@@ -86,6 +96,11 @@ function execDatatable(text) {
             { data: "date_created_laboratory" },
             { data: "actions", orderable: false, className: "text-center" },
         ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
         page = "laboratories";
     }
 
@@ -110,11 +125,16 @@ function execDatatable(text) {
             { data: "date_created_therapy" },
             { data: "actions", orderable: false, className: "text-center" },
         ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
         page = "therapies";
     }
 
     /*=============================================
-    Validamos tabla de terapias
+    Validamos tabla de sustancias
     =============================================*/
     if ($(".tableSubstances").length > 0) {
         var url =
@@ -134,20 +154,22 @@ function execDatatable(text) {
             { data: "date_created_substance" },
             { data: "actions", orderable: false, className: "text-center" },
         ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
         page = "substances";
     }
 
     adminsTable = $("#adminsTable").DataTable({
         responsive: true,
         lengthChange: true,
-        aLengthMenu: [
-            [10, 50, 100, 500, 1000],
-            [10, 50, 100, 500, 1000],
-        ],
+        aLengthMenu: aLengthMenu,
         autoWidth: false,
         processing: true,
         serverSide: true,
-        order: [[0, "desc"]],
+        order: order,
         ajax: {
             url: url,
             type: "POST",
@@ -202,12 +224,6 @@ function execDatatable(text) {
                     .buttons()
                     .container()
                     .appendTo("#adminsTable_wrapper .col-md-6:eq(0)");
-            }, 100);
-        });
-    } else {
-        $("#adminsTable").on("draw.dt", function () {
-            setTimeout(function () {
-                adminsTable.buttons().container().remove();
             }, 100);
         });
     }

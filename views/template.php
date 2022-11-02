@@ -31,7 +31,10 @@ foreach ($routesArray as $key => $value) {
 
     <link rel="icon" href="views/assets/img/template/icono.png">
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="views/assets/plugins/fontawesome-free/css/all.min.css">
     <!-- overlayScrollbars -->
@@ -82,7 +85,7 @@ foreach ($routesArray as $key => $value) {
         }
 
         .table>thead>tr>th {
-            padding: 5px !important;
+            padding: 3px !important;
         }
 
         .dataTables_filter input {
@@ -97,7 +100,8 @@ foreach ($routesArray as $key => $value) {
             $routesArray[1] == "categories" ||
             $routesArray[1] == "laboratories" ||
             $routesArray[1] == "therapies" ||
-            $routesArray[1] == "substances"
+            $routesArray[1] == "substances" ||
+            $routesArray[1] == "articles"
 
         ) : ?>
 
@@ -166,6 +170,7 @@ foreach ($routesArray as $key => $value) {
                         $routesArray[1] == "laboratories" ||
                         $routesArray[1] == "therapies" ||
                         $routesArray[1] == "substances" ||
+                        $routesArray[1] == "articles" ||
                         $routesArray[1] == "logout"
                     ) {
 

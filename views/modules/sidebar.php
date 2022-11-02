@@ -50,7 +50,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?php if (!empty($routesArray) && ($routesArray[1] == "categories" || $routesArray[1] == "laboratories")) : ?>active<?php endif ?>">
+                    <a href="#" class="nav-link <?php if (
+                                                    !empty($routesArray) &&
+                                                    ($routesArray[1] == "categories" ||
+                                                        $routesArray[1] == "laboratories" ||
+                                                        $routesArray[1] == "therapies" ||
+                                                        $routesArray[1] == "substances" ||
+                                                        $routesArray[1] == "articles")
+                                                ) : ?>active<?php endif ?>">
                         <i class="nav-icon fas fa-medkit"></i>
                         <p>
                             Artículos
@@ -86,6 +93,14 @@
                             <a href="substances" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "substances") : ?>active<?php endif ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sustancia Activa</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="articles" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "articles") : ?>active<?php endif ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Artículos</p>
                             </a>
                         </li>
                     </ul>

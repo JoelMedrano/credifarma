@@ -1,2 +1,7 @@
-[31-Oct-2022 11:50:39 America/Lima] PHP Notice:  Undefined variable: maxCode in C:\xampp\htdocs\credifarma\views\pages\substances\actions\edit.php on line 63
-[31-Oct-2022 11:51:40 America/Lima] PHP Notice:  Undefined property: stdClass::$vadecum_substance in C:\xampp\htdocs\credifarma\views\pages\substances\actions\edit.php on line 91
+[01-Nov-2022 23:39:59 America/Lima] PHP Notice:  Undefined index: switch1 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 79
+[01-Nov-2022 23:45:00 America/Lima] PHP Notice:  Undefined offset: 0 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 86
+[01-Nov-2022 23:45:00 America/Lima] PHP Notice:  Undefined offset: 0 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 86
+[01-Nov-2022 23:45:00 America/Lima] PHP Notice:  Undefined offset: 0 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 86
+[01-Nov-2022 23:48:22 America/Lima] PHP Notice:  Undefined index: switch2 in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 71
+[01-Nov-2022 23:59:53 America/Lima] PHP Notice:  Trying to get property 'lastId' of non-object in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 79
+[01-Nov-2022 23:59:53 America/Lima] PHP Notice:  Trying to get property 'lastId' of non-object in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 79
