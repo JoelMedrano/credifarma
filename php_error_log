@@ -1,2 +1,8 @@
-[31-Oct-2022 11:50:39 America/Lima] PHP Notice:  Undefined variable: maxCode in C:\xampp\htdocs\credifarma\views\pages\substances\actions\edit.php on line 63
-[31-Oct-2022 11:51:40 America/Lima] PHP Notice:  Undefined property: stdClass::$vadecum_substance in C:\xampp\htdocs\credifarma\views\pages\substances\actions\edit.php on line 91
+[02-Nov-2022 16:55:00 America/Lima] PHP Notice:  Undefined variable: article in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 185
+[02-Nov-2022 16:55:00 America/Lima] PHP Notice:  Trying to get property 'id_article' of non-object in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 185
+[02-Nov-2022 17:09:59 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:09:59 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:09:59 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:10:23 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:10:24 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
+[02-Nov-2022 17:10:24 America/Lima] PHP Notice:  Undefined property: stdClass::$id in C:\xampp\htdocs\credifarma\controllers\articles.controller.php on line 215
