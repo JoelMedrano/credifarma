@@ -295,7 +295,7 @@ if (isset($routesArray[3])) {
 
                         <label>Fracción</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" value="<?php echo $article->frac_article ?>" name="fraccion" required>
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" value="<?php echo $article->frac_article ?>" name="fraccion" required>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -309,7 +309,7 @@ if (isset($routesArray[3])) {
 
                         <label>Stk Min</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" value="<?php echo $article->stkmin_article ?>" name="stkmin">
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" value="<?php echo $article->stkmin_article ?>" name="stkmin">
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -323,7 +323,7 @@ if (isset($routesArray[3])) {
 
                         <label>Stk Max</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" value="<?php echo $article->stkmax_article ?>" name="stkmax">
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" value="<?php echo $article->stkmax_article ?>" name="stkmax">
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -455,6 +455,8 @@ if (isset($routesArray[3])) {
                         <div class="invalid-feedback">Please fill out this field.</div>
 
                     </div>
+
+                    <hr width="100%" size="10px" color="black">
 
                     <!--=====================================
                     CONFIGURACION DE EMPRESA

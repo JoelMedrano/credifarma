@@ -8,7 +8,7 @@ $fields = array();
 
 $response = CurlController::request($url, $method, $fields);
 
-$tamaño = 4;
+$tamaño = 5;
 
 if ($response->status == 200) {
     $code = $response->results[0];
@@ -227,7 +227,7 @@ $companies = $companiesData->results;
 
                         <label>Fracción</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" name="fraccion" required>
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" name="fraccion" required>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -241,7 +241,7 @@ $companies = $companiesData->results;
 
                         <label>Stk Min</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" name="stkmin">
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" name="stkmin">
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -255,7 +255,7 @@ $companies = $companiesData->results;
 
                         <label>Stk Max</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" name="stkmax">
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" name="stkmax">
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -351,6 +351,8 @@ $companies = $companiesData->results;
                         <div class="invalid-feedback">Please fill out this field.</div>
 
                     </div>
+
+                    <hr width="100%" size="10px" color="black">
 
                     <!--=====================================
                     CONFIGURACION DE EMPRESA
