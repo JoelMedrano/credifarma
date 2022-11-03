@@ -214,9 +214,11 @@ if (isset($routesArray[3])) {
                                         <?php if ($value->id_therapy == $id_therapy) : ?>
                                             <option value="<?php echo $id_therapy ?>" selected><?php echo $value->code_therapy . ' - ' . $value->name_therapy ?></option>
 
+                                        <?php else :   ?>
+                                            <option value="<?php echo $value->id_therapy ?>"><?php echo $value->code_therapy . ' - ' . $value->name_therapy ?></option>
+
                                         <?php endif ?>
 
-                                        <option value="<?php echo $value->id_therapy ?>"><?php echo $value->code_therapy . ' - ' . $value->name_therapy ?></option>
 
                                     <?php endforeach ?>
 
@@ -270,9 +272,11 @@ if (isset($routesArray[3])) {
                                         <?php if ($value->id_substance == $id_substance) : ?>
                                             <option value="<?php echo $id_substance ?>" selected><?php echo $value->code_substance . ' - ' . $value->name_substance ?></option>
 
+                                        <?php else : ?>
+
+                                            <option value="<?php echo $value->id_substance ?>"><?php echo $value->code_substance . ' - ' . $value->name_substance ?></option>
                                         <?php endif ?>
 
-                                        <option value="<?php echo $value->id_substance ?>"><?php echo $value->code_substance . ' - ' . $value->name_substance ?></option>
 
                                     <?php endforeach ?>
 

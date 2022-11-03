@@ -127,9 +127,14 @@ class DatatableController
 
                     $actions = "<a href='/articles/edit/" . base64_encode($value->id_article . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
 
-                    <i class='fas fa-pencil-alt'></i>
+                        <i class='fas fa-pencil-alt'></i>
 
-                    </a>";
+                    </a>
+                    <a class='btn btn-primary btn-xs rounded-circle articuloPerfil' idItem='" . $value->id_article . "'>
+
+			            <i class='fas fa-search'></i>
+
+			        </a>";
 
                     $actions = TemplateController::htmlClean($actions);
                 }
