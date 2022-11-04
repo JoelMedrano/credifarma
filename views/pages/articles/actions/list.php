@@ -80,7 +80,7 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
                         <div class="card card-dark card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" id="picture_category" src="views/img/categories/18/farmacos.png" alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle" id="picture_category" src="views/img/categories/31/31.png" alt="User profile picture">
                                 </div>
 
                                 <h3 class="profile-username text-center" id="name_article"></h3>

@@ -245,6 +245,9 @@ function execDatatable(text) {
             if (oSettings.aoData.length == 0) {
                 $(".dataTables_paginate").hide();
                 $(".dataTables_info").hide();
+            } else {
+                $(".dataTables_paginate").show();
+                $(".dataTables_info").show();
             }
         },
     });
