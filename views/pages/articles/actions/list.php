@@ -80,7 +80,7 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
                         <div class="card card-dark card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" src="views/img/categories/18/farmacos.png" alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle" id="picture_category" src="views/img/categories/18/farmacos.png" alt="User profile picture">
                                 </div>
 
                                 <h3 class="profile-username text-center" id="name_article"></h3>
@@ -99,6 +99,9 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
                                     </li>
                                     <li class="list-group-item p-0">
                                         <b>Precio Venta Fracción S/</b> <a class="float-right" id="frac_price_artcom"></a>
+                                    </li>
+                                    <li class="list-group-item p-0">
+                                        <b>Receta Médica</b> <a class="float-right" id="prescription_article"></a>
                                     </li>
                                 </ul>
 
@@ -125,37 +128,13 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
 
                                 <hr>
 
-                                <strong><i class="fas fa-pencil-alt mr-1"></i> Similares</strong>
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Alternativas</strong>
 
-                                <div style="background-color: lightblue;width: 100%; height:200px; overflow-y: scroll">
+                                <div class="form-group similares" id="similares">
 
-                                    <p class="p-0 m-0">
-                                        AB AMBROMOX NF 1200 AMP X1
-                                    </p>
-                                    <p class="p-0 m-0">
-                                        AB AMBROMOX NF 300 AMP X1
-                                    </p>
-                                    <p class="p-0 m-0">
-                                        AB FORTIMICIN NF 600MG AMP
-                                    </p>
-                                    <p class="p-0 m-0">
-                                        AB FORTIMICIN NF 600MG AMP
-                                    </p>
-                                    <p class="p-0 m-0">
-                                        AB FORTIMICIN NF 600MG AMP
-                                    </p>
-                                    <p class="p-0 m-0">
-                                        AB FORTIMICIN NF 600MG AMP
-                                    </p>
-                                    <p class="p-0 m-0">
-                                        AB FORTIMICIN NF 600MG AMP
-                                    </p>
                                 </div>
                                 <hr>
 
-                                <strong><i class="far fa-file-alt mr-1"></i> Receta Médica</strong>
-
-                                <span class="text-danger"><b>SI</b></span>
                             </div>
                             <!-- /.card-body -->
                         </div>

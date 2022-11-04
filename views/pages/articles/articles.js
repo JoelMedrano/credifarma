@@ -21,7 +21,15 @@ function changeState(event, idArticle) {
         cache: false,
         processData: false,
         success: function (response) {
+            console.log(
+                "🚀 ~ file: articles.js ~ line 24 ~ changeState ~ response",
+                response
+            );
             if (response == 200) {
+                console.log(
+                    "🚀 ~ file: articles.js ~ line 25 ~ changeState ~ response",
+                    response
+                );
                 fncNotie(1, "the record was updated");
             } else {
                 fncNotie(3, "Error updating registry");
@@ -32,6 +40,7 @@ function changeState(event, idArticle) {
 
 //*Ver el perfil del articulo
 $(document).on("click", ".articuloPerfil", function () {
+    $("p").remove(".similarBorrar");
     var id_article = $(this).attr("idItem");
 
     var data = new FormData();
@@ -49,10 +58,40 @@ $(document).on("click", ".articuloPerfil", function () {
         processData: false,
         success: function (response) {
             var articles = JSON.parse(response);
+
+            document.getElementById("picture_category").src =
+                "views/img/categories/" +
+                articles.results[0]["id_category_article"] +
+                "/" +
+                articles.results[0]["id_category_article"] +
+                ".png";
+
             document.getElementById("name_article").innerHTML =
                 articles.results[0]["code_article"] +
                 " - " +
                 articles.results[0]["name_article"];
+
+            if (articles.results[0]["prescription_article"] == "SI") {
+                document
+                    .getElementById("prescription_article")
+                    .classList.remove("text-success");
+                document
+                    .getElementById("prescription_article")
+                    .classList.add("text-danger");
+
+                document.getElementById("prescription_article").innerHTML =
+                    articles.results[0]["prescription_article"];
+            } else {
+                document
+                    .getElementById("prescription_article")
+                    .classList.remove("text-danger");
+                document
+                    .getElementById("prescription_article")
+                    .classList.add("text-success");
+
+                document.getElementById("prescription_article").innerHTML =
+                    articles.results[0]["prescription_article"];
+            }
 
             //*Inicio Laboratory
             var dataLaboratory = new FormData();
@@ -94,6 +133,10 @@ $(document).on("click", ".articuloPerfil", function () {
                 "equalTo",
                 id_article + "," + localStorage.getItem("company")
             );
+            dataArtCom.append("orderBy", "id_artcom");
+            dataArtCom.append("orderMode", "asc");
+            dataArtCom.append("startAt", "0");
+            dataArtCom.append("endAt", "1");
 
             $.ajax({
                 url: "ajax/ajax-select.php",
@@ -153,8 +196,15 @@ $(document).on("click", ".articuloPerfil", function () {
                 processData: false,
                 success: function (response) {
                     var therapies = JSON.parse(response);
-                    document.getElementById("name_therapy").innerHTML =
-                        therapies.results[0]["name_therapy"];
+
+                    if (therapies.status == 404) {
+                        document.getElementById("name_therapy").innerHTML = "";
+                    } else {
+                        document.getElementById("name_therapy").innerHTML =
+                            therapies.results[0]["code_therapy"] +
+                            " - " +
+                            therapies.results[0]["name_therapy"];
+                    }
                 },
             });
             //*fin Therapy
@@ -178,11 +228,64 @@ $(document).on("click", ".articuloPerfil", function () {
                 processData: false,
                 success: function (response) {
                     var substances = JSON.parse(response);
-                    document.getElementById("name_substance").innerHTML =
-                        substances.results[0]["name_substance"];
+
+                    if (substances.status == 404) {
+                        document.getElementById("name_substance").innerHTML =
+                            "";
+                    } else {
+                        document.getElementById("name_substance").innerHTML =
+                            substances.results[0]["code_substance"] +
+                            " - " +
+                            substances.results[0]["name_substance"];
+                    }
                 },
             });
             //*fin Substance
+
+            //*Inicio Similar
+            var dataSimilar = new FormData();
+            dataSimilar.append("rel", "articles,therapies");
+            dataSimilar.append("type", "article,therapy");
+            dataSimilar.append(
+                "select",
+                "id_article,code_article,name_article,id_therapy_article"
+            );
+            dataSimilar.append("linkTo", "id_therapy_article");
+            dataSimilar.append(
+                "equalTo",
+                articles.results[0]["id_therapy_article"]
+            );
+            dataSimilar.append("orderBy", "frac_stock_article");
+            dataSimilar.append("orderMode", "desc");
+            dataSimilar.append("startAt", "0");
+            dataSimilar.append("endAt", "10");
+
+            $.ajax({
+                url: "ajax/ajax-select.php",
+                method: "POST",
+                data: dataSimilar,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (response) {
+                    var substances = JSON.parse(response);
+
+                    if (substances.status == 404) {
+                        ('<p class="p-0 m-0 similarBorrar" id="similarBorrar"></p>');
+                    } else {
+                        for (let i = 0; i < substances.results.length; i++) {
+                            $(".similares").append(
+                                '<p class="p-0 m-0 similarBorrar" id="similarBorrar">' +
+                                    substances.results[i]["code_article"] +
+                                    " - " +
+                                    substances.results[i]["name_article"] +
+                                    "</p>"
+                            );
+                        }
+                    }
+                },
+            });
+            //*Fin Similar
         },
     });
 });

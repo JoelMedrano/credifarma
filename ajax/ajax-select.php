@@ -26,7 +26,7 @@ class SelectController
     public function dataSelectRel()
     {
 
-        $url = "relations?rel=" . $this->rel . "&type=" . $this->type . "&select=" . $this->select . "&linkTo=" . $this->linkTo . "&equalTo=" . $this->equalTo;
+        $url = "relations?rel=" . $this->rel . "&type=" . $this->type . "&select=" . $this->select . "&linkTo=" . $this->linkTo . "&equalTo=" . $this->equalTo . "&orderBy=" . $this->orderBy . "&orderMode=" . $this->orderMode . "&startAt=" . $this->startAt . "&endAt=" . $this->endAt;
         $method = "GET";
         $fields = array();
 
@@ -54,5 +54,9 @@ if (isset($_POST["rel"])) {
     $select->select = $_POST["select"];
     $select->linkTo = $_POST["linkTo"];
     $select->equalTo = $_POST["equalTo"];
+    $select->orderBy = $_POST["orderBy"];
+    $select->orderMode = $_POST["orderMode"];
+    $select->startAt = $_POST["startAt"];
+    $select->endAt = $_POST["endAt"];
     $select->dataSelectRel();
 }
