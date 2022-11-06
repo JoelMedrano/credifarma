@@ -53,18 +53,27 @@ class DatatableController
 
                     foreach ($linkTo as $key => $value) {
 
-                        $url = "relations?rel=articles,laboratories,categories&type=article,laboratory,category&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length . "&select=" . $select;
+                        $urlTotal = "relations?rel=articles,laboratories,categories&type=article,laboratory,category&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType;
+
+                        $dataTotal = CurlController::request($urlTotal, $method, $fields)->results;
+
+                        $url = "relations?rel=articles,laboratories,categories&type=article,laboratory,category&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                         $data = CurlController::request($url, $method, $fields)->results;
 
                         if ($data  == "Not Found") {
 
-                            $data = array();
-                            $recordsFiltered = count($data);
+                            /* $data = array();
+                            $recordsFiltered = count($data); */
+
+                            echo '{"data": []}';
+
+                            return;
                         } else {
 
                             $data = $data;
-                            $recordsFiltered = count($data);
+                            $totalData = count($dataTotal);
+                            $recordsFiltered = count($dataTotal);
 
                             break;
                         }
@@ -72,6 +81,8 @@ class DatatableController
                 } else {
 
                     echo '{"data": []}';
+
+                    return;
                 }
             } else {
 
@@ -80,6 +91,7 @@ class DatatableController
 
                 $data = CurlController::request($url, $method, $fields)->results;
 
+                $totalData = $response->total;
                 $recordsFiltered = $totalData;
             }
 
@@ -127,9 +139,14 @@ class DatatableController
 
                     $actions = "<a href='/articles/edit/" . base64_encode($value->id_article . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
 
-                    <i class='fas fa-pencil-alt'></i>
+                        <i class='fas fa-pencil-alt'></i>
 
-                    </a>";
+                    </a>
+                    <a class='btn btn-primary btn-xs rounded-circle articuloPerfil' idItem='" . $value->id_article . "'>
+
+			            <i class='fas fa-search'></i>
+
+			        </a>";
 
                     $actions = TemplateController::htmlClean($actions);
                 }

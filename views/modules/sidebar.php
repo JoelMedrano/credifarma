@@ -49,6 +49,7 @@
                     </a>
                 </li>
 
+                <!-- ARTÍCULOS -->
                 <li class="nav-item">
                     <a href="#" class="nav-link <?php if (
                                                     !empty($routesArray) &&
@@ -104,6 +105,29 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <!-- COMPRAS -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link <?php if (
+                                                    !empty($routesArray) &&
+                                                    ($routesArray[1] == "providers")
+                                                ) : ?>active<?php endif ?>">
+                        <i class="nav-icon fas fa-hospital-alt"></i>
+                        <p>
+                            Compras
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="providers" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "providers") : ?>active<?php endif ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Proveedores</p>
+                            </a>
+                        </li>
+                    </ul>
+
                 </li>
 
             </ul>

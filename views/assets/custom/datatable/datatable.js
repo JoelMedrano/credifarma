@@ -194,6 +194,37 @@ function execDatatable(text) {
         page = "articles";
     }
 
+    /*=============================================
+    Validamos tabla de proveedores
+    =============================================*/
+    if ($(".tableProviders").length > 0) {
+        var url =
+            "ajax/providers/data-providers.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_provider" },
+            { data: "code_provider" },
+            { data: "td_provider", className: "text-center" },
+            { data: "document_provider" },
+            { data: "bussiness_name_provider" },
+            { data: "state_provider" },
+            { data: "date_created_provider" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
+        page = "providers";
+    }
+
     adminsTable = $("#adminsTable").DataTable({
         responsive: true,
         lengthChange: true,
@@ -245,6 +276,9 @@ function execDatatable(text) {
             if (oSettings.aoData.length == 0) {
                 $(".dataTables_paginate").hide();
                 $(".dataTables_info").hide();
+            } else {
+                $(".dataTables_paginate").show();
+                $(".dataTables_info").show();
             }
         },
     });

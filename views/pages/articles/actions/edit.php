@@ -73,7 +73,7 @@ if (isset($routesArray[3])) {
 
                         <label>Código</label>
 
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}" onchange="validateRepeat(event,'regex','categories','code_category')" value="<?php echo $article->code_article ?>" name="code" required readonly>
+                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','categories','code_category')" value="<?php echo $article->code_article ?>" name="code" required readonly>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -87,7 +87,7 @@ if (isset($routesArray[3])) {
 
                         <label>Nombre</label>
 
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,}" onchange="validateJS(event,'regex')" value="<?php echo $article->name_article ?>" name="name" required>
+                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateJS(event,'regex')" value="<?php echo $article->name_article ?>" name="name" required>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -214,9 +214,11 @@ if (isset($routesArray[3])) {
                                         <?php if ($value->id_therapy == $id_therapy) : ?>
                                             <option value="<?php echo $id_therapy ?>" selected><?php echo $value->code_therapy . ' - ' . $value->name_therapy ?></option>
 
+                                        <?php else :   ?>
+                                            <option value="<?php echo $value->id_therapy ?>"><?php echo $value->code_therapy . ' - ' . $value->name_therapy ?></option>
+
                                         <?php endif ?>
 
-                                        <option value="<?php echo $value->id_therapy ?>"><?php echo $value->code_therapy . ' - ' . $value->name_therapy ?></option>
 
                                     <?php endforeach ?>
 
@@ -270,9 +272,11 @@ if (isset($routesArray[3])) {
                                         <?php if ($value->id_substance == $id_substance) : ?>
                                             <option value="<?php echo $id_substance ?>" selected><?php echo $value->code_substance . ' - ' . $value->name_substance ?></option>
 
+                                        <?php else : ?>
+
+                                            <option value="<?php echo $value->id_substance ?>"><?php echo $value->code_substance . ' - ' . $value->name_substance ?></option>
                                         <?php endif ?>
 
-                                        <option value="<?php echo $value->id_substance ?>"><?php echo $value->code_substance . ' - ' . $value->name_substance ?></option>
 
                                     <?php endforeach ?>
 
@@ -295,7 +299,7 @@ if (isset($routesArray[3])) {
 
                         <label>Fracción</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" value="<?php echo $article->frac_article ?>" name="fraccion" required>
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" value="<?php echo $article->frac_article ?>" name="fraccion" required>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -309,7 +313,7 @@ if (isset($routesArray[3])) {
 
                         <label>Stk Min</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" value="<?php echo $article->stkmin_article ?>" name="stkmin">
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" value="<?php echo $article->stkmin_article ?>" name="stkmin">
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -323,7 +327,7 @@ if (isset($routesArray[3])) {
 
                         <label>Stk Max</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'number')" value="<?php echo $article->stkmax_article ?>" name="stkmax">
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateJS(event,'numbers')" value="<?php echo $article->stkmax_article ?>" name="stkmax">
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -455,6 +459,8 @@ if (isset($routesArray[3])) {
                         <div class="invalid-feedback">Please fill out this field.</div>
 
                     </div>
+
+                    <hr width="100%" size="10px" color="black">
 
                     <!--=====================================
                     CONFIGURACION DE EMPRESA
