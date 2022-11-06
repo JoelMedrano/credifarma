@@ -106,7 +106,8 @@ foreach ($routesArray as $key => $value) {
             $routesArray[1] == "laboratories" ||
             $routesArray[1] == "therapies" ||
             $routesArray[1] == "substances" ||
-            $routesArray[1] == "articles"
+            $routesArray[1] == "articles" ||
+            $routesArray[1] == "providers"
 
         ) : ?>
 
@@ -176,6 +177,7 @@ foreach ($routesArray as $key => $value) {
                         $routesArray[1] == "therapies" ||
                         $routesArray[1] == "substances" ||
                         $routesArray[1] == "articles" ||
+                        $routesArray[1] == "providers" ||
                         $routesArray[1] == "logout"
                     ) {
 

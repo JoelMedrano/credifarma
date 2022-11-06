@@ -21,15 +21,7 @@ function changeState(event, idArticle) {
         cache: false,
         processData: false,
         success: function (response) {
-            console.log(
-                "🚀 ~ file: articles.js ~ line 24 ~ changeState ~ response",
-                response
-            );
             if (response == 200) {
-                console.log(
-                    "🚀 ~ file: articles.js ~ line 25 ~ changeState ~ response",
-                    response
-                );
                 fncNotie(1, "the record was updated");
             } else {
                 fncNotie(3, "Error updating registry");

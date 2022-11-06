@@ -1,50 +1,80 @@
 <?php
 
-$select = "code_laboratory";
+$select = "code_provider";
 
-$url = "laboratories?select=" . $select . "&orderBy=code_laboratory&orderMode=DESC&startAt=0&endAt=1";
+$url = "providers?select=" . $select . "&orderBy=code_provider&orderMode=DESC&startAt=0&endAt=1";
 $method = "GET";
 $fields = array();
 
 $response = CurlController::request($url, $method, $fields);
 
-$tamaño = 4;
+$tamaño = 3;
 
 if ($response->status == 200) {
     $code = $response->results[0];
-    $maxCode = str_pad($code->code_laboratory + 1, $tamaño, '0', STR_PAD_LEFT);
+    $maxCode = str_pad($code->code_provider + 1, $tamaño, '0', STR_PAD_LEFT);
 } else {
     $maxCode = str_pad('1', $tamaño, '0', STR_PAD_LEFT);
 }
 
 ?>
-
 <div class="card card-dark card-outline">
 
-    <form method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+    <form method="post" id="formProvider" class="needs-validation" novalidate enctype="multipart/form-data">
 
         <div class="card-header">
 
             <?php
 
-            require_once "controllers/laboratories.controller.php";
+            require_once "controllers/providers.controller.php";
 
-            $create = new LaboratoriesController();
+            $create = new ProvidersController();
             $create->create();
 
             ?>
 
-            <div class="col-md-10 offset-md-1">
+            <div class="col-lg-10 offset-lg-1">
 
                 <div class="form-group mt-2 row">
                     <!--=====================================
                     Codigo
                     ======================================-->
-                    <div class="col-lg-2 form-group">
+                    <div class="col-lg-1 form-group">
 
                         <label>Código</label>
 
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','laboratories','code_laboratory')" name="codigo" value="<?php echo $maxCode ?>" required readonly>
+                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','providers','code_provider')" name="codigo" value="<?php echo $maxCode ?>" required readonly>
+
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+
+                    </div>
+
+                    <!--=====================================
+                    Tipo Documento Identidad
+                    ======================================-->
+                    <div class="col-lg-3 form-group">
+
+                        <label>Tipo Documento Identidad</label>
+
+                        <?php
+
+                        $tdi = file_get_contents("views/assets/json/tipo_documento_identidad.json");
+                        $tdi = json_decode($tdi, true);
+
+                        ?>
+
+                        <select class="form-control select2" onchange="fncFormatInputs()" name="td_provider" id="td_provider" required>
+
+                            <option value>Seleccionar Documento</option>
+
+                            <?php foreach ($tdi as $key => $value) : ?>
+
+                                <option value="<?php echo $value["code"] ?>"><?php echo $value["description"] ?></option>
+
+                            <?php endforeach ?>
+
+                        </select>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -58,21 +88,7 @@ if ($response->status == 200) {
 
                         <label>RUC</label>
 
-                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateConsulta(event,'numbers','6')" name="documento" id="documento">
-
-                        <div id="valid-feedback" class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-
-                    </div>
-
-                    <!--=====================================
-                    Razón Social
-                    ======================================-->
-                    <div class="col-lg-8 form-group">
-
-                        <label>Razón Social</label>
-
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','laboratories','bussiness_name_laboratory')" name="bussiness_name" id="bussiness_name">
+                        <input type="text" class="form-control" pattern="[.\\,\\0-9]{1,}" onchange="validateConsultaProviders(event,'numbers')" name="document_provider" id="document_provider" required>
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -80,13 +96,13 @@ if ($response->status == 200) {
                     </div>
 
                     <!--=====================================
-                    Nombre
+                    Razón Social
                     ======================================-->
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-6 form-group">
 
-                        <label>Nombre</label>
+                        <label>Razón Social</label>
 
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','laboratories','name_laboratory')" name="name" id="name" required>
+                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','providers','bussiness_name_provider')" name="bussiness_name" id="bussiness_name">
 
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -181,23 +197,9 @@ if ($response->status == 200) {
                     </div>
 
                     <!--=====================================
-                    Gerente
+                    Email
                     ======================================-->
-                    <div class="col-lg-6 form-group">
-
-                        <label>Gerente</label>
-
-                        <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateJS(event,'regex')" name="ceo" id="ceo">
-
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-
-                    </div>
-
-                    <!--=====================================
-                    Contacto
-                    ======================================-->
-                    <div class="col-lg-6 form-group">
+                    <div class="col-lg-4 form-group">
 
                         <label>Email</label>
 
@@ -222,7 +224,7 @@ if ($response->status == 200) {
 
                 <div class="form-group mt-3">
 
-                    <a href="/laboratories" class="btn btn-light border text-left">Back</a>
+                    <a href="/providers" class="btn btn-light border text-left">Back</a>
 
                     <button type="submit" class="btn bg-dark float-right">Save</button>
 
@@ -236,8 +238,9 @@ if ($response->status == 200) {
     </form>
 
 </div>
-<script src="views/pages/laboratories/laboratories.js"></script>
+<script src="views/pages/providers/providers.js"></script>
+
 
 <script>
-    window.document.title = "Laboratorios - Nuevo"
+    window.document.title = "Proveedores - Nueva"
 </script>

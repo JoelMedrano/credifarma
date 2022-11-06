@@ -1,9 +1,9 @@
-ALTER TABLE artscoms MODIFY 
-COLUMN date_updated_artcom
+ALTER TABLE purchases MODIFY 
+COLUMN date_updated_purchase
 TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ON UPDATE CURRENT_TIMESTAMP;
 
-SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'articles'; AND database_name='credifarma';
+SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'providers' AND table_schema='credifarma';
 
 SELECT * FROM therapies;
 UPDATE therapies SET date_created_therapy='2022-11-01';
@@ -24,6 +24,9 @@ UPDATE artscoms SET date_created_artcom ='2022-11-02';
 
 SELECT @@global.time_zone, @@session.time_zone;
 SET @@session.time_zone='-05:00';
+
+SELECT * FROM providers;
+UPDATE providers SET date_created_provider ='2022-11-05';
 
 SELECT NOW();
 

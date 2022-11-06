@@ -13,3 +13,9 @@ id_substance,code_substance,name_substance,vadecum_substance,vadecumb_substance,
 # Tabla articulos
 
 id_article,code_article,name_article,id_category_article,id_laboratory_article,frac_article,stkmin_article,stkmax_article,id_therapy_article,id_substance_article,prescription_article,verification_article,state_article,digemid_article,specialcode_article,barcode_article,pcreg_article,usreg_article,pcmod_article,usmod_article,date_created_article,date_updated_article
+
+# Tabla proveedores
+
+id_provider,code_provider,td_provider,document_provider,bussiness_name_provider,address_provider,pc_provider,phone1_provider,phone2_provider,contact_provider,email_provider,state_provider,pcreg_provider,usreg_provider,pcmod_provider,usmod_provider,date_created_provider,date_updated_provider
+
+https://cart.hostinger.com/pay/d8056f55-d1ff-4732-8972-03139186a817
