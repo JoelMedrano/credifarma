@@ -205,3 +205,21 @@ function createUrl(event, name) {
 
     $('[name="' + name + '"]').val(value);
 }
+
+//* Función para crear Url's
+function createCorrelativo(event, name) {
+    var codigo = name;
+
+    var data = new FormData();
+    data.append("codigo", codigo);
+
+    $.ajax({
+        url: "ajax/ajax-correlative.php",
+        method: "POST",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {},
+    });
+}

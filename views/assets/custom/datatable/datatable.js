@@ -225,6 +225,29 @@ function execDatatable(text) {
         page = "providers";
     }
 
+    /*=============================================
+    Validamos tabla de articulos para compras
+    =============================================*/
+    if ($(".tableArticlesPurchases").length > 0) {
+        var url =
+            "ajax/purchases/data-articlespurchases.php?text=" +
+            text +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "code_article" },
+            { data: "name_article" },
+            { data: "name_laboratory" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        var order = [[0, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
+        page = "new";
+    }
+
     adminsTable = $("#adminsTable").DataTable({
         responsive: true,
         lengthChange: true,
