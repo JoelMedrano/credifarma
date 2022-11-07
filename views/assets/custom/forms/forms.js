@@ -171,7 +171,15 @@ function validateRepeat(event, type, table, suffix) {
         cache: false,
         processData: false,
         success: function (response) {
+            console.log(
+                "🚀 ~ file: forms.js ~ line 174 ~ validateRepeat ~ response",
+                response
+            );
             if (response == "200") {
+                console.log(
+                    "🚀 ~ file: forms.js ~ line 175 ~ validateRepeat ~ response",
+                    response
+                );
                 event.target.value = "";
                 $(event.target).parent().addClass("was-validated");
                 $(event.target)
@@ -220,6 +228,11 @@ function createCorrelativo(event, name) {
         contentType: false,
         cache: false,
         processData: false,
-        success: function (response) {},
+        success: function (response) {
+            console.log(
+                "🚀 ~ file: forms.js ~ line 224 ~ createCorrelativo ~ response",
+                response
+            );
+        },
     });
 }
