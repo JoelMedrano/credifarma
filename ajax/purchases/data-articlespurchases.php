@@ -47,7 +47,7 @@ class DatatableController
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["code_article", "name_article", "name_laboratory", "name_category"];
+                    $linkTo = ["name_article", "name_laboratory", "name_category"];
 
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 

@@ -103,7 +103,7 @@ $(".tableArticlesPurchases tbody").on(
                                     "</div>" +
                                     "<!-- Descuento -->" +
                                     '<div class="col-lg-1 ingresoDescuento" style="padding-left:0px">' +
-                                    '<input type="number" step="any" class="form-control form-control-sm nuevoDescuentoArticulo" min="0" value="0">' +
+                                    '<input type="number" step="any" class="form-control form-control-sm nuevoDescuentoArticulo" min="0" value="0" max="100">' +
                                     "</div>" +
                                     "<!-- Total -->" +
                                     '<div class="col-lg-1 ingresoTotal" style="padding-left:0px">' +
@@ -201,18 +201,26 @@ $(".tableArticlesPurchases").on("draw.dt", function () {
 //*cuando se cambien las cantidad
 $(".formularioCompras").on(
     "change",
-    "input.nuevaCantidadArticulo",
+    "input.nuevaCantidadArticulo,input.nuevoPrecioArticuloSinIGV,input.nuevoDescuentoArticulo,input.nuevoFVArticulo, input.nuevoLoteArticulo",
     function () {
-        var cantidad = $(this).val();
+        var undCant = $(this)
+            .parent()
+            .parent()
+            .children(".ingresoCantidad")
+            .children(".nuevaCantidadArticulo")
+            .val();
 
-        var fraccion = $(this)
+        var fraccionDato = $(this)
             .parent()
             .parent()
             .children(".ingresoFraccion")
-            .children(".nuevaFraccionArticulo")
-            .val();
+            .children(".nuevaFraccionArticulo");
 
-        var precio = $(this)
+        var undFrac = fraccionDato.val();
+
+        var frac = fraccionDato.attr("fracarticle");
+
+        var ps = $(this)
             .parent()
             .parent()
             .children(".ingresoPrecioSinIGV")
@@ -226,59 +234,6 @@ $(".formularioCompras").on(
             .children(".nuevoDescuentoArticulo")
             .val();
 
-        var total = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoTotal")
-            .children(".nuevoTotalArticulo")
-            .val();
-
-        console.log(cantidad, fraccion, precio, descuento, total);
-
-        listarCompras();
-    }
-);
-
-//*cuando se cambien el precio
-$(".formularioCompras").on(
-    "change",
-    "input.nuevoPrecioArticuloSinIGV",
-    function () {
-        var precio = $(this).val();
-
-        var cantidad = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoCantidad")
-            .children(".nuevaCantidadArticulo");
-
-        var descuento = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoDescuento")
-            .children(".nuevoDescuentoArticulo");
-
-        cantidadFinal = cantidad.val();
-
-        nuevoTotal = Number(precio) * Number(cantidadFinal);
-
-        var nuevoTotalDescuento =
-            (Number(nuevoTotal) * (100 - Number(descuento.val()))) / 100;
-
-        nuevoPrecioCIGV = Number(precio) * 1.18;
-
-        var precioCIGV = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoPrecioConIGV")
-            .children(".nuevoPrecioArticuloConIGV");
-
-        var total = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoTotal")
-            .children(".nuevoTotalArticulo");
-
         var utilidad = $(this)
             .parent()
             .parent()
@@ -286,7 +241,31 @@ $(".formularioCompras").on(
             .children(".nuevoUtilidadArticulo");
         var pv = utilidad.attr("pv");
 
-        nuevaUtilidad = Number(nuevoPrecioCIGV) - Number(pv);
+        var nuevoTotal =
+            (Number(ps) * Number(undCant) +
+                (Number(ps) / Number(frac)) * Number(undFrac)) *
+            ((100 - Number(descuento)) / 100) *
+            1.18;
+
+        var total = $(this)
+            .parent()
+            .parent()
+            .children(".ingresoTotal")
+            .children(".nuevoTotalArticulo");
+
+        total.val(nuevoTotal.toFixed(2));
+
+        var precioCIGV = $(this)
+            .parent()
+            .parent()
+            .children(".ingresoPrecioConIGV")
+            .children(".nuevoPrecioArticuloConIGV");
+
+        var pc = ps * 1.18;
+
+        precioCIGV.val(pc.toFixed(2));
+
+        var nuevaUtilidad = pv - pc;
 
         if (nuevaUtilidad > 0) {
             utilidad.addClass("is-valid");
@@ -296,55 +275,8 @@ $(".formularioCompras").on(
             utilidad.addClass("is-invalid");
         }
 
-        precioCIGV.val(nuevoPrecioCIGV.toFixed(2));
-        total.val(nuevoTotalDescuento.toFixed(2));
         utilidad.val(nuevaUtilidad.toFixed(2));
 
-        listarCompras();
-    }
-);
-
-//*cuando se cambien el descuento
-$(".formularioCompras").on(
-    "change",
-    "input.nuevoDescuentoArticulo",
-    function () {
-        var descuento = $(this).val();
-
-        var precio = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoPrecioSinIGV")
-            .children(".nuevoPrecioArticuloSinIGV");
-
-        var cantidad = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoCantidad")
-            .children(".nuevaCantidadArticulo");
-
-        nuevoTotal = Number(precio.val()) * Number(cantidad.val());
-
-        var nuevoTotalDescuento =
-            (Number(nuevoTotal) * (100 - Number(descuento))) / 100;
-
-        var total = $(this)
-            .parent()
-            .parent()
-            .children(".ingresoTotal")
-            .children(".nuevoTotalArticulo");
-
-        total.val(nuevoTotalDescuento.toFixed(2));
-
-        listarCompras();
-    }
-);
-
-//*cuando se cambien el descuento
-$(".formularioCompras").on(
-    "change",
-    "input.nuevoFVArticulo, input.nuevoLoteArticulo",
-    function () {
         listarCompras();
     }
 );
@@ -355,6 +287,7 @@ function listarCompras() {
 
     var articulo = $(".nuevaDescripcionArticulo");
     var cantidad = $(".nuevaCantidadArticulo");
+    var fraccion = $(".nuevaFraccionArticulo");
     var preciosigv = $(".nuevoPrecioArticuloSinIGV");
     var preciocigv = $(".nuevoPrecioArticuloConIGV");
     var descuento = $(".nuevoDescuentoArticulo");
@@ -367,6 +300,7 @@ function listarCompras() {
         listaCompra.push({
             id_article: $(articulo[i]).attr("idArticle"),
             cantidad: $(cantidad[i]).val(),
+            fraccion: $(fraccion[i]).val(),
             preciosigv: $(preciosigv[i]).val(),
             preciocigv: $(preciocigv[i]).val(),
             descuento: $(descuento[i]).val(),
@@ -377,15 +311,6 @@ function listarCompras() {
         });
     }
 
-    console.log("jsonDetalleCompra", JSON.stringify(listaCompra));
+    /* console.log("jsonDetalleCompra", JSON.stringify(listaCompra)); */
     $("#jsonDetalleCompra").val(JSON.stringify(listaCompra));
-}
-
-//*Calcular precio
-function CalcularTotal(unidadC, fraccionC, frac, psigv, dscto) {
-    var total = (psigv * unidadC + (psigv / frac) * 6 * (100 - dscto)) / 100;
-    console.log(
-        "🚀 ~ file: purchases.js ~ line 384 ~ CalcularTotal ~ total",
-        total
-    );
 }

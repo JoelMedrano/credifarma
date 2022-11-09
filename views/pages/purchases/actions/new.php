@@ -320,7 +320,7 @@ if ($response->status == 200) {
 
                     </div>
 
-                    <input type="text" id="jsonDetalleCompra" name="jsonDetalleCompra">
+                    <input type="hidden" id="jsonDetalleCompra" name="jsonDetalleCompra">
 
                 </div>
 
