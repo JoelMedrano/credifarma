@@ -247,7 +247,7 @@ if ($response->status == 200) {
 
                         <div class="row">
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
 
                                 <label>Artículo</label>
 
@@ -256,6 +256,12 @@ if ($response->status == 200) {
                             <div class="col-lg-1">
 
                                 <label>Cantidad</label>
+
+                            </div>
+
+                            <div class="col-lg-1">
+
+                                <label>Fracción</label>
 
                             </div>
 

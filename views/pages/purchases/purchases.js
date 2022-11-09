@@ -9,7 +9,10 @@ $(".tableArticlesPurchases tbody").on(
         var data = new FormData();
         data.append("rel", "articles,laboratories");
         data.append("type", "article,laboratory");
-        data.append("select", "id_article,name_article,name_laboratory");
+        data.append(
+            "select",
+            "id_article,name_article,frac_article,name_laboratory"
+        );
         data.append("linkTo", "id_article");
         data.append("equalTo", idArticle);
         data.append("orderBy", "id_article");
@@ -29,6 +32,7 @@ $(".tableArticlesPurchases tbody").on(
                 var articles = response.results;
                 var id_article = articles[0]["id_article"];
                 var name_article = articles[0]["name_article"];
+                var frac_article = articles[0]["frac_article"];
                 var name_laboratory = articles[0]["name_laboratory"];
 
                 //*Inicio Artcom
@@ -56,32 +60,38 @@ $(".tableArticlesPurchases tbody").on(
                     success: function (response) {
                         var artcom = JSON.parse(response);
                         if (artcom.status == 200) {
-                            $("#" + idArticle).removeClass(
+                            /* $("#" + idArticle).removeClass(
                                 "btn-primary agregarCompra"
                             );
-                            $("#" + idArticle).addClass("btn-default");
+                            $("#" + idArticle).addClass("btn-default"); */
                             $(".nuevoDetalleCompra").append(
                                 '<div class="row mt-1">' +
                                     "<!-- Descripción del artículo -->" +
-                                    '<div class="col-lg-4">' +
+                                    '<div class="col-lg-3">' +
                                     '<div class="input-group">' +
                                     '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-sm quitarArticulo" idArticle="' +
                                     id_article +
                                     '"><i class="fa fa-times"></i></button></span>' +
-                                    '<input type="text" class="form-control form-control-sm nuevaDescripcionArticulo" idArticle="' +
+                                    '<textarea type="text" class="form-control form-control-sm nuevaDescripcionArticulo" style="font-size:12px" rows="2" idArticle="' +
                                     id_article +
-                                    '" value="' +
+                                    '" readonly>' +
                                     name_article +
                                     " - " +
                                     name_laboratory +
                                     " - PV S/ " +
                                     artcom.results[0]["full_price_artcom"] +
-                                    '" readonly required>' +
+                                    "</textarea>" +
                                     "</div>" +
                                     "</div>" +
                                     "<!-- Cantidad -->" +
                                     '<div class="col-lg-1 ingresoCantidad" style="padding-left:0px">' +
                                     '<input type="number" step="any" class="form-control form-control-sm nuevaCantidadArticulo" name="nuevaCantidadArticulo" min="0" required>' +
+                                    "</div>" +
+                                    "<!-- Faccion -->" +
+                                    '<div class="col-lg-1 ingresoFraccion" style="padding-left:0px">' +
+                                    '<input type="number" step="any" class="form-control form-control-sm nuevaFraccionArticulo" name="nuevaFraccionArticulo" min="0" fracArticle="' +
+                                    frac_article +
+                                    '" required>' +
                                     "</div>" +
                                     "<!-- Precio sin igv -->" +
                                     '<div class="col-lg-1 ingresoPrecioSinIGV" style="padding-left:0px">' +
@@ -159,13 +169,9 @@ $(".formularioCompras").on("click", "button.quitarArticulo", function () {
     );
 
     if ($(".nuevoDetalleCompra").children().length == 0) {
-        /* $("#nuevoTotalOrdenCorte").val(0);
-        $("#totalOrdenCorte").val(0);
-        $("#nuevoTotalOrdenCorte").attr("total", 0.0);
-        $("#jsonOrdenCorteN").val(""); */
+        $("#jsonDetalleCompra").val("");
     } else {
-        /* sumarTotalPrecios();
-        listarOC(); */
+        listarCompras();
     }
 });
 
@@ -199,32 +205,35 @@ $(".formularioCompras").on(
     function () {
         var cantidad = $(this).val();
 
+        var fraccion = $(this)
+            .parent()
+            .parent()
+            .children(".ingresoFraccion")
+            .children(".nuevaFraccionArticulo")
+            .val();
+
         var precio = $(this)
             .parent()
             .parent()
             .children(".ingresoPrecioSinIGV")
-            .children(".nuevoPrecioArticuloSinIGV");
+            .children(".nuevoPrecioArticuloSinIGV")
+            .val();
 
         var descuento = $(this)
             .parent()
             .parent()
             .children(".ingresoDescuento")
-            .children(".nuevoDescuentoArticulo");
-
-        precioFinal = precio.val();
-
-        nuevoTotal = Number(cantidad) * Number(precioFinal);
-
-        var nuevoTotalDescuento =
-            (Number(nuevoTotal) * (100 - Number(descuento.val()))) / 100;
+            .children(".nuevoDescuentoArticulo")
+            .val();
 
         var total = $(this)
             .parent()
             .parent()
             .children(".ingresoTotal")
-            .children(".nuevoTotalArticulo");
+            .children(".nuevoTotalArticulo")
+            .val();
 
-        total.val(nuevoTotalDescuento.toFixed(2));
+        console.log(cantidad, fraccion, precio, descuento, total);
 
         listarCompras();
     }
@@ -370,4 +379,13 @@ function listarCompras() {
 
     console.log("jsonDetalleCompra", JSON.stringify(listaCompra));
     $("#jsonDetalleCompra").val(JSON.stringify(listaCompra));
+}
+
+//*Calcular precio
+function CalcularTotal(unidadC, fraccionC, frac, psigv, dscto) {
+    var total = (psigv * unidadC + (psigv / frac) * 6 * (100 - dscto)) / 100;
+    console.log(
+        "🚀 ~ file: purchases.js ~ line 384 ~ CalcularTotal ~ total",
+        total
+    );
 }
