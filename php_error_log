@@ -1,3 +1,12 @@
-[07-Nov-2022 14:14:13 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\credifarma\views\pages\purchases\actions\new.php on line 84
-[07-Nov-2022 14:14:22 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\credifarma\views\pages\purchases\actions\new.php on line 84
-[07-Nov-2022 14:14:27 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\credifarma\views\pages\purchases\actions\new.php on line 84
+[09-Nov-2022 23:43:06 America/Lima] PHP Notice:  Trying to get property 'full_price_artcom' of non-object in C:\xampp\htdocs\credifarma\controllers\purchases.controller.php on line 108
+[09-Nov-2022 23:43:33 America/Lima] PHP Notice:  Undefined index: full_price_artcom in C:\xampp\htdocs\credifarma\controllers\purchases.controller.php on line 108
+[09-Nov-2022 23:44:10 America/Lima] PHP Notice:  Trying to get property 'full_price_artcom' of non-object in C:\xampp\htdocs\credifarma\controllers\purchases.controller.php on line 108
+[09-Nov-2022 23:46:39 America/Lima] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\credifarma\controllers\purchases.controller.php:108
+Stack trace:
+#0 C:\xampp\htdocs\credifarma\views\pages\purchases\actions\new.php(34): PurchasesController->create()
+#1 C:\xampp\htdocs\credifarma\views\pages\purchases\purchases.php(42): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\credifarma\views\template.php(213): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\credifarma\controllers\template.controller.php(9): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\credifarma\index.php(27): TemplateController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\credifarma\controllers\purchases.controller.php on line 108

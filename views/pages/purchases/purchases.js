@@ -85,13 +85,13 @@ $(".tableArticlesPurchases tbody").on(
                                     "</div>" +
                                     "<!-- Cantidad -->" +
                                     '<div class="col-lg-1 ingresoCantidad" style="padding-left:0px">' +
-                                    '<input type="number" step="any" class="form-control form-control-sm nuevaCantidadArticulo" name="nuevaCantidadArticulo" min="0" required>' +
+                                    '<input type="number" step="any" class="form-control form-control-sm nuevaCantidadArticulo" name="nuevaCantidadArticulo" min="0">' +
                                     "</div>" +
                                     "<!-- Faccion -->" +
                                     '<div class="col-lg-1 ingresoFraccion" style="padding-left:0px">' +
                                     '<input type="number" step="any" class="form-control form-control-sm nuevaFraccionArticulo" name="nuevaFraccionArticulo" min="0" fracArticle="' +
                                     frac_article +
-                                    '" required>' +
+                                    '">' +
                                     "</div>" +
                                     "<!-- Precio sin igv -->" +
                                     '<div class="col-lg-1 ingresoPrecioSinIGV" style="padding-left:0px">' +
@@ -117,7 +117,7 @@ $(".tableArticlesPurchases tbody").on(
                                     "</div>" +
                                     "<!-- Fecha Vencimiento -->" +
                                     '<div class="col-lg-1 ingresoFV" style="padding-left:0px">' +
-                                    '<input type="date" class="form-control form-control-sm nuevoFVArticulo">' +
+                                    '<input type="date" class="form-control form-control-sm nuevoFVArticulo" style="font-size:10px">' +
                                     "</div>" +
                                     "<!-- Lote -->" +
                                     '<div class="col-lg-1 ingresoLote" style="padding-left:0px">' +
@@ -126,6 +126,7 @@ $(".tableArticlesPurchases tbody").on(
                                     "</div>"
                             );
                             listarCompras();
+                            sumarTotalPrecios();
                         } else {
                             fncNotie(
                                 3,
@@ -172,6 +173,7 @@ $(".formularioCompras").on("click", "button.quitarArticulo", function () {
         $("#jsonDetalleCompra").val("");
     } else {
         listarCompras();
+        sumarTotalPrecios();
     }
 });
 
@@ -241,12 +243,21 @@ $(".formularioCompras").on(
             .children(".nuevoUtilidadArticulo");
         var pv = utilidad.attr("pv");
 
-        var nuevoTotal =
-            (Number(ps) * Number(undCant) +
-                (Number(ps) / Number(frac)) * Number(undFrac)) *
-            ((100 - Number(descuento)) / 100) *
-            1.18;
-
+        if (frac == 0) {
+            fncNotie(3, "No esta definida la cantidad por fracción");
+            var nuevoTotal =
+                Number(ps) *
+                Number(undCant) *
+                ((100 - Number(descuento)) / 100) *
+                1.18;
+        } else {
+            frac;
+            var nuevoTotal =
+                (Number(ps) * Number(undCant) +
+                    (Number(ps) / Number(frac)) * Number(undFrac)) *
+                ((100 - Number(descuento)) / 100) *
+                1.18;
+        }
         var total = $(this)
             .parent()
             .parent()
@@ -278,6 +289,7 @@ $(".formularioCompras").on(
         utilidad.val(nuevaUtilidad.toFixed(2));
 
         listarCompras();
+        sumarTotalPrecios();
     }
 );
 
@@ -313,4 +325,23 @@ function listarCompras() {
 
     /* console.log("jsonDetalleCompra", JSON.stringify(listaCompra)); */
     $("#jsonDetalleCompra").val(JSON.stringify(listaCompra));
+}
+
+//*SUMAR TODOS LOS PRECIOS
+function sumarTotalPrecios() {
+    var precioItem = $(".nuevoTotalArticulo");
+
+    var arraySumaPrecioT = [];
+
+    for (var i = 0; i < precioItem.length; i++) {
+        arraySumaPrecioT.push(Number($(precioItem[i]).val()));
+    }
+
+    function sumaArrayPrecios(total, numero) {
+        return total + numero;
+    }
+
+    var sumaTotalPrecio = arraySumaPrecioT.reduce(sumaArrayPrecios, 0);
+
+    $("#total").val(sumaTotalPrecio.toFixed(2));
 }

@@ -28,10 +28,10 @@ if ($response->status == 200) {
 
             <?php
 
-            /* require_once "controllers/articles.controller.php";
+            require_once "controllers/purchases.controller.php";
 
-            $create = new ArticlesController();
-            $create->create(); */
+            $create = new PurchasesController();
+            $create->create();
 
             ?>
         </div>
@@ -149,7 +149,7 @@ if ($response->status == 200) {
 
                             <label>Guia</label>
 
-                            <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" name="guide" required>
+                            <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" name="guide">
 
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
@@ -190,7 +190,7 @@ if ($response->status == 200) {
                         <!--=====================================
                         Compañia
                         ======================================-->
-                        <div class="col-lg-6 form-group m-1">
+                        <div class="col-lg-6 form-group m-0">
 
                             <label>Sucursal<sup class="text-danger">*</sup></label>
 
@@ -229,9 +229,23 @@ if ($response->status == 200) {
                         ======================================-->
                         <div class="col-lg-3 form-group m-0">
 
-                            <label>Total</label>
+                            <label>Total S/</label>
 
-                            <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" name="total" id="total" required>
+                            <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" name="total" id="total" readonly>
+
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+
+                        </div>
+
+                        <!--=====================================
+                        Vencimiento
+                        ======================================-->
+                        <div class="col-lg-3 form-group m-0">
+
+                            <label>Fecha de pago</label>
+
+                            <input type="date" class="form-control" name="expiration" id="expiration">
 
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
