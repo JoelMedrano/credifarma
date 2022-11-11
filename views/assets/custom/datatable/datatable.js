@@ -226,6 +226,40 @@ function execDatatable(text) {
     }
 
     /*=============================================
+    Validamos tabla de proveedores
+    =============================================*/
+    if ($(".tablePurchases").length > 0) {
+        var url =
+            "ajax/purchases/data-purchases.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_purchase" },
+            { data: "code_purchase" },
+            { data: "name_company" },
+            { data: "td_purchase", className: "text-center" },
+            { data: "document_purchase" },
+            { data: "bussiness_name_provider" },
+            { data: "tp_purchase", className: "text-center" },
+            { data: "date_expiration_purchase" },
+            { data: "total_purchase" },
+            { data: "date_created_purchase" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        var order = [[1, "desc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
+        page = "purchases";
+    }
+
+    /*=============================================
     Validamos tabla de articulos para compras
     =============================================*/
     if ($(".tableArticlesPurchases").length > 0) {
@@ -315,6 +349,13 @@ function execDatatable(text) {
                     .appendTo("#adminsTable_wrapper .col-md-6:eq(0)");
             }, 100);
         });
+    } else {
+        setTimeout(function () {
+            adminsTable
+                .buttons()
+                .container()
+                .remove("#adminsTable_wrapper .col-md-6:eq(0)");
+        }, 1000);
     }
 }
 
@@ -336,6 +377,10 @@ function reportActive(event) {
         $("#adminsTable").dataTable().fnDestroy();
 
         setTimeout(function () {
+            adminsTable
+                .buttons()
+                .container()
+                .remove("#adminsTable_wrapper .col-md-6:eq(0)");
             execDatatable("html");
         }, 100);
     }

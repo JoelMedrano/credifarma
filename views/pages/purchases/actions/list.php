@@ -51,9 +51,13 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
                 <tr>
                     <th>#</th>
                     <th>Codigo</th>
+                    <th>Sucursal</th>
                     <th>Tipo Documento</th>
                     <th>Documento</th>
                     <th>Razón Social</th>
+                    <th>Tipo de Pago</th>
+                    <th>Fecha de Pago</th>
+                    <th>Monto S/</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>

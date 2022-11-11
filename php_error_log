@@ -10,3 +10,5 @@ Stack trace:
 #4 C:\xampp\htdocs\credifarma\index.php(27): TemplateController->index()
 #5 {main}
   thrown in C:\xampp\htdocs\credifarma\controllers\purchases.controller.php on line 108
+[10-Nov-2022 20:28:26 America/Lima] PHP Notice:  Trying to get property 'status' of non-object in C:\xampp\htdocs\credifarma\controllers\admins.controller.php on line 31
+[10-Nov-2022 20:28:26 America/Lima] PHP Notice:  Trying to get property 'results' of non-object in C:\xampp\htdocs\credifarma\controllers\admins.controller.php on line 53
