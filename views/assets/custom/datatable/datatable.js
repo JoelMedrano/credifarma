@@ -444,3 +444,10 @@ $("#daterange-btn").daterangepicker(
             end.format("YYYY-MM-DD");
     }
 );
+
+//*Recargar la tabla
+$(document).on("click", ".btnRecargarTabla", function () {
+    $("#adminsTable").dataTable().fnClearTable();
+    $("#adminsTable").dataTable().fnDestroy();
+    execDatatable("html");
+});

@@ -338,16 +338,25 @@ if ($response->status == 200) {
                 </div>
 
                 <div class="col-lg-12">
-                    <table id="adminsTable" class="table table-bordered table-striped tableArticlesPurchases">
-                        <thead>
-                            <tr>
-                                <th>Codigo</th>
-                                <th>Nombre</th>
-                                <th>Laboratorio</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                    </table>
+
+                    <div class="card-tools">
+
+                        <h3 class="card-title">
+                            <button type="button" class="btn bg-dark btn-sm btnRecargarTabla">Recargar Tabla</button>
+                        </h3>
+
+                        <table id="adminsTable" class="table table-bordered table-striped tableArticlesPurchases">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Laboratorio</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

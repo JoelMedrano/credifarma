@@ -57,7 +57,8 @@
                                                         $routesArray[1] == "laboratories" ||
                                                         $routesArray[1] == "therapies" ||
                                                         $routesArray[1] == "substances" ||
-                                                        $routesArray[1] == "articles")
+                                                        $routesArray[1] == "articles" ||
+                                                        $routesArray[1] == "globalarticles")
                                                 ) : ?>active<?php endif ?>">
                         <i class="nav-icon fas fa-medkit"></i>
                         <p>
@@ -102,6 +103,14 @@
                             <a href="articles" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "articles") : ?>active<?php endif ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Artículos</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="globalarticles" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "globalarticles") : ?>active<?php endif ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Conf. Articulos</p>
                             </a>
                         </li>
                     </ul>
