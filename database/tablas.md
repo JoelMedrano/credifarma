@@ -19,3 +19,7 @@ id_article,code_article,name_article,id_category_article,id_laboratory_article,f
 id_provider,code_provider,td_provider,document_provider,bussiness_name_provider,address_provider,pc_provider,phone1_provider,phone2_provider,contact_provider,email_provider,state_provider,pcreg_provider,usreg_provider,pcmod_provider,usmod_provider,date_created_provider,date_updated_provider
 
 https://cart.hostinger.com/pay/d8056f55-d1ff-4732-8972-03139186a817
+
+# Tabla Compras
+
+id_purchase,code_purchase,id_provider_purchase,td_purchase,document_purchase,guide_purchase,tp_purchase,state_purchase,total_purchase,id_user_purchase,id_company_purchase,pcreg_purchase,usreg_purchase,pcmod_purchase,usmod_purchase,date_expiration_purchase,date_created_purchase,date_updated_purchase

@@ -107,7 +107,8 @@ foreach ($routesArray as $key => $value) {
             $routesArray[1] == "therapies" ||
             $routesArray[1] == "substances" ||
             $routesArray[1] == "articles" ||
-            $routesArray[1] == "providers"
+            $routesArray[1] == "providers" ||
+            $routesArray[1] == "purchases"
 
         ) : ?>
 
@@ -133,6 +134,33 @@ foreach ($routesArray as $key => $value) {
             <script src="views/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
         <?php endif ?>
+
+    <?php elseif (
+        isset($routesArray[2]) &&
+        ($routesArray[1] == "purchases" &&
+            ($routesArray[2] == "new" || $routesArray[2] == "edit"))
+    ) : ?>
+
+        <!-- DataTables  & Plugins -->
+        <link rel="stylesheet" href="views/assets/plugins/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" href="views/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="views/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="views/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+        <script src="views/assets/plugins/moment/moment.min.js"></script>
+        <script src="views/assets/plugins/daterangepicker/daterangepicker.js"></script>
+        <script src="views/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="views/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="views/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="views/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="views/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="views/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="views/assets/plugins/jszip/jszip.min.js"></script>
+        <script src="views/assets/plugins/pdfmake/pdfmake.min.js"></script>
+        <script src="views/assets/plugins/pdfmake/vfs_fonts.js"></script>
+        <script src="views/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="views/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+        <script src="views/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <?php endif ?>
 
@@ -178,6 +206,7 @@ foreach ($routesArray as $key => $value) {
                         $routesArray[1] == "substances" ||
                         $routesArray[1] == "articles" ||
                         $routesArray[1] == "providers" ||
+                        $routesArray[1] == "purchases" ||
                         $routesArray[1] == "logout"
                     ) {
 

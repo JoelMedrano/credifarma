@@ -171,7 +171,15 @@ function validateRepeat(event, type, table, suffix) {
         cache: false,
         processData: false,
         success: function (response) {
+            console.log(
+                "🚀 ~ file: forms.js ~ line 174 ~ validateRepeat ~ response",
+                response
+            );
             if (response == "200") {
+                console.log(
+                    "🚀 ~ file: forms.js ~ line 175 ~ validateRepeat ~ response",
+                    response
+                );
                 event.target.value = "";
                 $(event.target).parent().addClass("was-validated");
                 $(event.target)
@@ -204,4 +212,27 @@ function createUrl(event, name) {
     value = value.replace(/[ñ]/g, "n");
 
     $('[name="' + name + '"]').val(value);
+}
+
+//* Función para crear Url's
+function createCorrelativo(event, name) {
+    var codigo = name;
+
+    var data = new FormData();
+    data.append("codigo", codigo);
+
+    $.ajax({
+        url: "ajax/ajax-correlative.php",
+        method: "POST",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            console.log(
+                "🚀 ~ file: forms.js ~ line 224 ~ createCorrelativo ~ response",
+                response
+            );
+        },
+    });
 }

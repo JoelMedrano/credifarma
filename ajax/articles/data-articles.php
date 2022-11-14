@@ -87,7 +87,7 @@ class DatatableController
             } else {
 
                 //*Seleccionar datos
-                $url = "relations?rel=articles,laboratories,categories&type=article,laboratory,category&select=" . $select . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                $url = "relations?rel=articles,laboratories,categories&type=article,laboratory,category&select=" . $select . "&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                 $data = CurlController::request($url, $method, $fields)->results;
 

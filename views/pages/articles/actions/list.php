@@ -68,7 +68,6 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-
                     </table>
                 </div>
                 </div>
@@ -148,11 +147,11 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
 
 
     </div>
+</div>
 
+<script src="views/assets/custom/datatable/datatable.js"></script>
+<script src="views/pages/articles/articles.js"></script>
 
-    <script src="views/assets/custom/datatable/datatable.js"></script>
-    <script src="views/pages/articles/articles.js"></script>
-
-    <script>
-        window.document.title = "Artículos"
-    </script>
+<script>
+    window.document.title = "Artículos"
+</script>

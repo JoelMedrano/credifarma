@@ -64,7 +64,7 @@ if ($response->status == 200) {
 
                         ?>
 
-                        <select class="form-control select2" onchange="fncFormatInputs()" name="td_provider" id="td_provider" required>
+                        <select class="form-control select2" name="td_provider" id="td_provider" required>
 
                             <option value>Seleccionar Documento</option>
 
@@ -212,7 +212,6 @@ if ($response->status == 200) {
 
 
                 </div>
-
 
             </div>
 

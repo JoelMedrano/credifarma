@@ -128,6 +128,15 @@
                         </li>
                     </ul>
 
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="purchases" class="nav-link <?php if (!empty($routesArray) && $routesArray[1] == "purchases") : ?>active<?php endif ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Compras</p>
+                            </a>
+                        </li>
+                    </ul>
+
                 </li>
 
             </ul>
