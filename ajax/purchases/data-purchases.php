@@ -120,7 +120,7 @@ class DatatableController
 
                     if ($value->td_purchase == "01") {
                         $td_purchase = "<span class='badge badge-primary p-2'>Factura</span>";
-                    } else if ($value->td_purchase == "02") {
+                    } else if ($value->td_purchase == "03") {
                         $td_purchase = "<span class='badge badge-info p-2'>Boleta</span>";
                     } else {
                         $td_purchase = "<span class='badge badge-dark p-2'>Sin Documento</span>";
@@ -134,7 +134,11 @@ class DatatableController
                         $tp_purchase = "<span class='badge badge-dark p-2'>Letras</span>";
                     }
 
-                    $actions = "";
+                    $actions = "<a href='/purchases/edit/" . base64_encode($value->id_purchase . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
+
+                                    <i class='fas fa-pencil-alt'></i>
+
+                                </a>";
                     $actions = TemplateController::htmlClean($actions);
                 }
 

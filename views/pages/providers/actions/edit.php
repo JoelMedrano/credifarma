@@ -34,7 +34,7 @@ if (isset($routesArray[3])) {
 
             $td_provider = $provider->td_provider;
             if ($td_provider == null ||  $td_provider = "") {
-                $tdcode = "Seleccionar Departamento";
+                $tdcode = "Seleccionar Documento";
             } else {
                 $td = file_get_contents("views/assets/json/tipo_documento_identidad.json");
                 $td = json_decode($td, true);

@@ -17,8 +17,6 @@ if ($response->status == 200) {
     $maxCode = str_pad('1', $tamaño, '0', STR_PAD_LEFT);
 }
 
-
-
 ?>
 <div class="card card-dark card-outline">
 
@@ -281,15 +279,16 @@ if ($response->status == 200) {
 
                             <div class="col-lg-1">
 
-                                <label for="">Precio S. IGV</label>
+                                <label for="">Precio C. IGV</label>
 
                             </div>
 
                             <div class="col-lg-1">
 
-                                <label for="">Precio C. IGV</label>
+                                <label for="">Precio S. IGV</label>
 
                             </div>
+
 
                             <div class="col-lg-1">
 
@@ -359,7 +358,7 @@ if ($response->status == 200) {
 
                 <div class="form-group mt-3">
 
-                    <a href="/articles" class="btn btn-light border text-left">Back</a>
+                    <a href="/purchases" class="btn btn-light border text-left">Back</a>
 
                     <button type="submit" class="btn bg-dark float-right">Save</button>
 

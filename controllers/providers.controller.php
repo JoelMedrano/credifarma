@@ -89,8 +89,8 @@ class ProvidersController
 
             echo '<script>
     
-                    /* matPreloader("on");
-                    fncSweetAlert("loading", "Loading...", ""); */
+                    matPreloader("on");
+                    fncSweetAlert("loading", "Loading...", "");
     
                 </script>';
 
