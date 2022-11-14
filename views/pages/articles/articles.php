@@ -12,7 +12,7 @@
 
                     if (isset($routesArray[2])) {
 
-                        if ($routesArray[2] == "new" || $routesArray[2] == "edit") {
+                        if ($routesArray[2] == "new" || $routesArray[2] == "edit" || $routesArray[2] == "import") {
 
                             echo '<li class="breadcrumb-item"><a href="/articles">Artículos</a></li>';
                             echo '<li class="breadcrumb-item active">' . $routesArray[2] . '</li>';
@@ -37,7 +37,7 @@
 
         if (isset($routesArray[2])) {
 
-            if ($routesArray[2] == "new" || $routesArray[2] == "edit") {
+            if ($routesArray[2] == "new" || $routesArray[2] == "edit" || $routesArray[2] == "import") {
 
                 include "actions/" . $routesArray[2] . ".php";
             }

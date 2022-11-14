@@ -19,7 +19,11 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
     <div class="card-header">
 
         <h3 class="card-title">
-            <a class="btn bg-dark btn-sm" href="/articles/new">Nuevo Artículo</a>
+            <a class="btn bg-dark btn-sm mr-2" href="/articles/new">Nuevo Artículo</a>
+        </h3>
+
+        <h3 class="card-title">
+            <a class="btn bg-dark btn-sm" href="/articles/import">Importar Artículo</a>
         </h3>
 
         <div class="card-tools">

@@ -281,3 +281,34 @@ $(document).on("click", ".articuloPerfil", function () {
         },
     });
 });
+
+/*=============================================
+Importar articulos a la lista de disponibles
+=============================================*/
+function importArticle(event, idDbArticle) {
+    if (event.target.checked) {
+        var state = "2";
+    } else {
+        var state = "1";
+    }
+
+    var data = new FormData();
+    data.append("dbstate", state);
+    data.append("idDbArticle", idDbArticle);
+    data.append("dbtoken", localStorage.getItem("token_user"));
+
+    $.ajax({
+        url: "ajax/articles/ajax-articles.php",
+        method: "POST",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            console.log(
+                "🚀 ~ file: articles.js ~ line 308 ~ importArticle ~ response",
+                response
+            );
+        },
+    });
+}

@@ -195,6 +195,38 @@ function execDatatable(text) {
     }
 
     /*=============================================
+    Validamos tabla de base de datos articles
+    =============================================*/
+    if ($(".tableDbArticles").length > 0) {
+        var url =
+            "ajax/articles/data-dbarticles.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_dbarticle" },
+            { data: "code_dbarticle" },
+            { data: "name_dbarticle" },
+            { data: "name_category" },
+            { data: "name_laboratory" },
+            { data: "prescription_dbarticle", className: "text-center" },
+            { data: "state_dbarticle", className: "text-center" },
+            { data: "date_created_dbarticle" },
+            { data: "actions", orderable: false, className: "text-center" },
+        ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
+        page = "import";
+    }
+
+    /*=============================================
     Validamos tabla de proveedores
     =============================================*/
     if ($(".tableProviders").length > 0) {

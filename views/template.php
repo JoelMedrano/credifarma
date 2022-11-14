@@ -138,8 +138,10 @@ foreach ($routesArray as $key => $value) {
 
     <?php elseif (
         isset($routesArray[2]) &&
-        ($routesArray[1] == "purchases" &&
-            ($routesArray[2] == "new" || $routesArray[2] == "edit"))
+        (($routesArray[1] == "purchases" &&
+            ($routesArray[2] == "new" || $routesArray[2] == "edit")) ||
+            ($routesArray[1] == "articles" &&
+                ($routesArray[2] == "import")))
     ) : ?>
 
         <!-- DataTables  & Plugins -->
