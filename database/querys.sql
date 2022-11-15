@@ -18,7 +18,7 @@ UPDATE substances SET date_created_substance='2022-11-01';
 
 SELECT * FROM categories;
 
-SELECT * FROM articles WHERE id_article='44867';
+SELECT * FROM articles; WHERE id_article='44867';
 UPDATE articles SET date_created_article ='2022-11-02';
 
 SELECT * FROM artscoms;

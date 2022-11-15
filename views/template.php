@@ -29,7 +29,7 @@ foreach ($routesArray as $key => $value) {
 
     <base href="<?php echo TemplateController::path() ?>">
 
-    <link rel="icon" href="views/assets/img/template/icono.png">
+    <link rel="icon" href="views/assets/img/template/favicon.png">
     <!-- Google Font: Source Sans Pro -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
 

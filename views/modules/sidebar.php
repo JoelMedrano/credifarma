@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-light-navy elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link navbar-navy">
-        <img src="views/assets/img/template/logo_light.png" alt="AdminLTE Logo" style="opacity: .8">
+        <img src="views/assets/img/template/logo.png" width="150px" alt="AdminLTE Logo" style="opacity: .8">
         <!-- <span class="brand-text font-weight-light">AdminLTE 3</span> -->
     </a>
 
