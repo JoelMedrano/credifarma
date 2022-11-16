@@ -123,7 +123,7 @@ class DatatableController
 
                     if ($value->state_dbarticle == "2") {
 
-                        $state_dbarticle = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='importArticle(event," . $value->id_dbarticle . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        $state_dbarticle = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked ><label class='custom-control-label' for='switch" . $key . "'></label></div>";
                     } else {
 
                         $state_dbarticle = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='importArticle(event," . $value->id_dbarticle . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
@@ -137,16 +137,7 @@ class DatatableController
                         $prescription_dbarticle = "<span class='badge badge-success p-2'>NO</span>";
                     }
 
-                    $actions = "<a href='/dbarticles/edit/" . base64_encode($value->id_dbarticle . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
-
-                        <i class='fas fa-pencil-alt'></i>
-
-                    </a>
-                    <a class='btn btn-primary btn-xs rounded-circle articuloPerfil' idItem='" . $value->id_dbarticle . "'>
-
-			            <i class='fas fa-search'></i>
-
-			        </a>";
+                    $actions = "";
 
                     $actions = TemplateController::htmlClean($actions);
                 }

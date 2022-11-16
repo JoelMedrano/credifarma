@@ -305,9 +305,10 @@ function importArticle(event, idDbArticle) {
         cache: false,
         processData: false,
         success: function (response) {
-            console.log(
-                "🚀 ~ file: articles.js ~ line 308 ~ importArticle ~ response",
-                response
+            fncSweetAlert(
+                "success",
+                "Your records were created successfully",
+                "/articles/import"
             );
         },
     });

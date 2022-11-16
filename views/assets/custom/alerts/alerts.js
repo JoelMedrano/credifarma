@@ -148,7 +148,7 @@ function fncFormatInputs() {
 }
 
 //*antes de cerrar el navegador
-window.addEventListener(
+/* window.addEventListener(
     "beforeunload",
     function () {
         // milisegundos que espera el navegador antes de cerrar la pagina
@@ -169,3 +169,4 @@ window.addEventListener(
     },
     false
 );
+ */
