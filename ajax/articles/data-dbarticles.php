@@ -23,7 +23,7 @@ class DatatableController
             $length = $_POST['length']; //Indicador de la longitud de la paginación.
 
             //*El total de registros de la data
-            $url = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&linkTo=date_created_dbarticle&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&select=code_dbarticle";
+            $url = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&linkTo=date_created_dbarticle&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&select=code_dbarticle&filterTo=state_dbarticle&inTo=1";
 
             $method = "GET";
             $fields = array();
@@ -53,11 +53,11 @@ class DatatableController
 
                     foreach ($linkTo as $key => $value) {
 
-                        $urlTotal = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType;
+                        $urlTotal = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&select=" . $select . "&linkTo=" . $value . ",state_dbarticle&search=" . $search . ",1&orderBy=" . $orderBy . "&orderMode=" . $orderType;
 
                         $dataTotal = CurlController::request($urlTotal, $method, $fields)->results;
 
-                        $url = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                        $url = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&select=" . $select . "&linkTo=" . $value . ",state_dbarticle&search=" . $search . ",1&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                         $data = CurlController::request($url, $method, $fields)->results;
 
@@ -87,7 +87,7 @@ class DatatableController
             } else {
 
                 //*Seleccionar datos
-                $url = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&select=" . $select . "&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                $url = "relations?rel=dbarticles,laboratories,categories&type=dbarticle,laboratory,category&select=" . $select . "&between1=" . $_GET["between1"] . "&between2=" . $_GET["between2"] . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length . "&linkTo=state_dbarticle&equalTo=1";
 
                 $data = CurlController::request($url, $method, $fields)->results;
 
