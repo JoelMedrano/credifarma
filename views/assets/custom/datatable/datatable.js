@@ -216,14 +216,13 @@ function execDatatable(text) {
             { data: "prescription_dbarticle", className: "text-center" },
             { data: "state_dbarticle", className: "text-center" },
             { data: "date_created_dbarticle" },
-            { data: "actions", orderable: false, className: "text-center" },
         ];
         var order = [[1, "asc"]];
         var aLengthMenu = [
             [20, 50, 100, 500, 1000],
             [20, 50, 100, 500, 1000],
         ];
-        page = "import";
+        page = "articles/import";
     }
 
     /*=============================================

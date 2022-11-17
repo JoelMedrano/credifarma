@@ -107,6 +107,7 @@ foreach ($routesArray as $key => $value) {
             $routesArray[1] == "therapies" ||
             $routesArray[1] == "substances" ||
             $routesArray[1] == "articles" ||
+            $routesArray[1] == "import" ||
             $routesArray[1] == "providers" ||
             $routesArray[1] == "purchases" ||
             $routesArray[1] == "globalarticles"
@@ -215,6 +216,8 @@ foreach ($routesArray as $key => $value) {
                     ) {
 
                         include "views/pages/" . $routesArray[1] . "/" . $routesArray[1] . ".php";
+                    } else if ($routesArray[1] == "import") {
+                        include "views/pages/articles/actions/" . $routesArray[1] . ".php";
                     } else {
 
                         include "views/pages/404/404.php";

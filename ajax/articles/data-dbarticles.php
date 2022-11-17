@@ -159,8 +159,7 @@ class DatatableController
                     "name_laboratory":"' . $name_laboratory . '",
                     "prescription_dbarticle":"' . $prescription_dbarticle . '",
                     "state_dbarticle":"' . $state_dbarticle . '",
-            		"date_created_dbarticle":"' . $date_created_dbarticle . '",
-            		"actions":"' . $actions . '"
+            		"date_created_dbarticle":"' . $date_created_dbarticle . '"
 
             	},';
             }
