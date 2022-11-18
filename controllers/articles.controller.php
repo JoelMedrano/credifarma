@@ -263,4 +263,60 @@ class ArticlesController
             }
         }
     }
+
+    //*Solicitar Actualizacion
+    public function update()
+    {
+        if (isset($_POST["code"])) {
+            echo '<script>
+
+				/* matPreloader("on");
+				fncSweetAlert("loading", "Loading...", ""); */
+
+			</script>';
+            if (
+                preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}$/', $_POST["code"]) &&
+                preg_match('/^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}$/', $_POST["name"])
+            ) {
+                //*Agrupamos la información 
+                $pcreg_barticle = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                $usreg_barticle = $_SESSION["admin"]->username_user;
+
+                $data = array(
+
+                    "id_user_barticle" => $_SESSION["admin"]->id_user,
+                    "id_article_barticle" => trim(strtoupper($_POST["id_article"])),
+                    "code_barticle" => trim(strtoupper($_POST["code"])),
+                    "name_barticle" => trim(strtoupper($_POST["name"])),
+                    "id_therapy_barticle" => trim(strtoupper($_POST["therapy"])),
+                    "id_substance_barticle" => trim(strtoupper($_POST["substance"])),
+                    "observation_barticle" => trim(strtoupper($_POST["observation"])),
+                    "pcreg_barticle" =>  $pcreg_barticle,
+                    "usreg_barticle" =>  $usreg_barticle,
+                    "date_created_barticle" => date("Y-m-d")
+
+                );
+
+                //*Solicitud a la API
+                $url = "barticles?token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+                $method = "POST";
+                $fields = $data;
+
+                $response = CurlController::request($url, $method, $fields);
+                echo '<pre>';
+                print_r($response);
+                echo '</pre>';
+            } else {
+
+                echo '<script>
+
+					fncFormatInputs();
+					matPreloader("off");
+					fncSweetAlert("close", "", "");
+					fncNotie(3, "Field syntax error");
+
+				</script>';
+            }
+        }
+    }
 }

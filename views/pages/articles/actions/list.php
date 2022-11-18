@@ -153,6 +153,189 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
     </div>
 </div>
 
+<?php
+
+?>
+
+<!-- MODAL Configurar Articulo -->
+<div class="modal fade" id="modalConfigurarArticulo">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <form method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+
+                <input type="hidden" name="id_article" id="id_article">
+                <input type="hidden" name="id_company" id="id_company">
+
+                <?php
+
+                require_once "controllers/articles.controller.php";
+
+                $create = new ArticlesController();
+                $create->update();
+
+                ?>
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Solicitar Actualización</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="col-lg-12">
+
+                        <div class="form-group mt-2 row">
+
+                            <!--=====================================
+                            Codigo
+                            ======================================-->
+                            <div class="col-lg-3 form-group">
+
+                                <label>Código</label>
+
+                                <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateRepeat(event,'regex','categories','code_category')" name="code" id="code" required readonly>
+
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+
+                            </div>
+
+                            <!--=====================================
+                            Nombre
+                            ======================================-->
+                            <div class="col-lg-9 form-group">
+
+                                <label>Nombre</label>
+
+                                <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" onchange="validateJS(event,'regex')" name="name" id="name" required readonly>
+
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+
+                            </div>
+
+                            <!--=====================================
+                            Funcion Terapeutica
+                            ======================================-->
+                            <div class="col-lg-6 form-group">
+
+                                <label>Funcion Terapeútica</label>
+
+                                <?php
+
+                                $url = "therapies?select=id_therapy,code_therapy,name_therapy";
+                                $method = "GET";
+                                $fields = array();
+
+                                $therapies = CurlController::request($url, $method, $fields)->results;
+
+                                ?>
+
+                                <div class="form-group">
+
+                                    <select class="form-control select2" name="therapy" id="therapy" style="width:100%">
+
+                                        <option value="">Seleccionar Funcion Terapeútica</option>
+
+                                        <?php foreach ($therapies as $key => $value) : ?>
+
+                                            <option value="<?php echo $value->id_therapy ?>"><?php echo $value->code_therapy . ' - ' . $value->name_therapy ?></option>
+
+                                        <?php endforeach ?>
+
+                                    </select>
+
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+
+                                </div>
+                            </div>
+
+                            <!--=====================================
+                            Sustancia Activa
+                            ======================================-->
+                            <div class="col-lg-6 form-group">
+
+                                <label>Sustancia Activa</label>
+
+                                <?php
+
+                                $url = "substances?select=id_substance,code_substance,name_substance";
+                                $method = "GET";
+                                $fields = array();
+
+                                $substances = CurlController::request($url, $method, $fields)->results;
+
+                                ?>
+
+                                <div class="form-group">
+
+                                    <select class="form-control select2" name="substance" id="substance" style="width:100%">
+
+                                        <option value="">Seleccionar Sustancia Activa</option>
+
+                                        <?php foreach ($substances as $key => $value) : ?>
+
+                                            <option value="<?php echo $value->id_substance ?>"><?php echo $value->code_substance . ' - ' . $value->name_substance ?></option>
+
+                                        <?php endforeach ?>
+
+                                    </select>
+
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+
+                                </div>
+                            </div>
+
+                            <!--=====================================
+                            Ubicacion
+                            ======================================-->
+                            <div class="col-lg-6 form-group">
+
+                                <label>Ubicación</label>
+
+                                <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" name="location" id="location">
+
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+
+                            </div>
+
+
+                            <!--=====================================
+                            Obervacion
+                            ======================================-->
+                            <div class="col-lg-6 form-group">
+
+                                <label>Observación</label>
+
+                                <input type="text" class="form-control" pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\/\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]{1,}" name="observation" id="observation">
+
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-dark">Guardar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
 <script src="views/assets/custom/datatable/datatable.js"></script>
 <script src="views/pages/articles/articles.js"></script>
 

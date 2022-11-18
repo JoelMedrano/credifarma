@@ -142,11 +142,16 @@ class DatatableController
                         <i class='fas fa-pencil-alt'></i>
 
                     </a>
-                    <a class='btn btn-primary btn-xs rounded-circle articuloPerfil' idItem='" . $value->id_article . "'>
+                    <a class='btn btn-primary btn-xs rounded-circle mr-1 articuloPerfil' idItem='" . $value->id_article . "'>
 
 			            <i class='fas fa-search'></i>
 
-			        </a>";
+			        </a>
+                    <button class='btn bg-navy btn-xs btnConfigurarArticulo' title='Configuración' data-toggle='modal' data-target='#modalConfigurarArticulo'
+                    id_article=" . $value->id_article . " 
+                    code_article=" . $value->code_article . ">
+                        <i class='fas fa-cogs'></i>
+                    </button>";
 
                     $actions = TemplateController::htmlClean($actions);
                 }

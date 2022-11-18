@@ -54,7 +54,7 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
         <div class="col-lg-12">
 
             <div class="card-body">
-                <table id="adminsTable" class="table table-bordered table-striped tableDbArticles">
+                <table id="adminsTable" class="table table-bordered table-striped tableGlobalArticles">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -81,5 +81,5 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
 <script src="views/pages/articles/articles.js"></script>
 
 <script>
-    window.document.title = "Artículos Importar"
+    window.document.title = "Conf. Artículos"
 </script>

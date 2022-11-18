@@ -313,3 +313,59 @@ function importArticle(event, idDbArticle) {
         },
     });
 }
+
+//*Ver el perfil del articulo
+$(document).on("click", ".btnConfigurarArticulo", function () {
+    var id_article = $(this).attr("id_article");
+    $("#id_article").val(id_article);
+
+    var company = localStorage.getItem("company");
+    $("#id_company").val(company);
+
+    var data = new FormData();
+    data.append("data", id_article);
+    data.append("select", "*");
+    data.append("table", "articles");
+    data.append("suffix", "id_article");
+
+    $.ajax({
+        url: "ajax/ajax-select.php",
+        method: "POST",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            var articles = JSON.parse(response);
+
+            $("#code").val(articles.results[0]["code_article"]);
+            $("#name").val(articles.results[0]["name_article"]);
+
+            $("#therapy").val(articles.results[0]["id_therapy_article"]);
+            $("#therapy").select2();
+
+            $("#substance").val(articles.results[0]["id_substance_article"]);
+            $("#substance").select2();
+        },
+    });
+
+    var dataB = new FormData();
+    dataB.append("data", id_article + "," + company);
+    dataB.append("select", "*");
+    dataB.append("table", "artscoms");
+    dataB.append("suffix", "id_article_artcom,id_company_artcom");
+
+    $.ajax({
+        url: "ajax/ajax-select.php",
+        method: "POST",
+        data: dataB,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            var artscoms = JSON.parse(response);
+
+            $("#location").val(artscoms.results[0]["location_artcom"]);
+        },
+    });
+});
