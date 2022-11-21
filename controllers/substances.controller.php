@@ -103,14 +103,14 @@ class SubstancesController
 
                         //*Agrupamos la información 
                         $pcmod_substance = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                        $udmod_substance = $_SESSION["admin"]->username_user;
+                        $usmod_substance = $_SESSION["admin"]->username_user;
 
                         $data =
                             "code_substance=" . trim(strtoupper($_POST["codigo"])) .
                             "&name_substance=" . trim(strtoupper($_POST["nombre"])) .
                             "&vadecum_substance=" . trim(strtoupper($_POST["vadecum"])) .
                             "&pcmod_substance=" .  $pcmod_substance .
-                            "&usmod_substance=" .  $udmod_substance;
+                            "&usmod_substance=" .  $usmod_substance;
 
                         //*Solicitud a la API
                         $url = "substances?id=" . $id . "&nameId=id_substance&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";

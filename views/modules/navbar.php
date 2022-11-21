@@ -1,3 +1,20 @@
+<?php
+$select = "*";
+
+$url = "barticles?select=*&linkTo=state_barticle&equalTo=1";
+$method = "GET";
+$fields = array();
+
+$response = CurlController::request($url, $method, $fields);
+
+if ($response->status == 200) {
+    $total = $response->total;
+} else {
+    $total = 0;
+}
+
+?>
+
 <nav class="main-header navbar navbar-expand navbar-navy navbar-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -8,6 +25,18 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+
+        <?php if ($_SESSION["admin"]->rol_user == "administrador") : ?>
+            <!-- Solicitudes-->
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="articles/request">
+                    <i class="fas fa-cogs"></i>
+                    <span class="badge badge-primary navbar-badge"><?php echo $total ?></span>
+                </a>
+            </li>
+
+        <?php endif ?>
+
 
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">

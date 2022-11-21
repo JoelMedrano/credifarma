@@ -1,0 +1,3 @@
+[18-Nov-2022 22:09:03 America/Lima] PHP Notice:  Undefined property: stdClass::$total in C:\xampp\htdocs\credifarma\views\modules\navbar.php on line 13
+[20-Nov-2022 00:00:22 America/Lima] PHP Notice:  Trying to get property 'status' of non-object in C:\xampp\htdocs\credifarma\views\modules\navbar.php on line 10
+[20-Nov-2022 20:42:13 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\credifarma\views\pages\purchases\actions\edit.php on line 394

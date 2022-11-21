@@ -42,6 +42,10 @@ class AdminsController
                     $_SESSION["admin"] = $response->results[0];
 
                     echo '<script>
+
+                    localStorage.removeItem("token_user");
+                    localStorage.removeItem("rol_user");
+                    localStorage.removeItem("company");
                     
                     localStorage.setItem("token_user", "' . $response->results[0]->token_user . '");
                     localStorage.setItem("rol_user", "' . $response->results[0]->rol_user . '");

@@ -118,7 +118,7 @@ $(document).on("click", ".articuloPerfil", function () {
             dataArtCom.append("type", "artcom,company");
             dataArtCom.append(
                 "select",
-                "id_artcom,id_article_artcom,id_company_artcom,frac_price_artcom,frac_stock_artcom,full_price_artcom,full_stock_artcom"
+                "id_artcom,id_article_artcom,id_company_artcom,frac_price_artcom,frac_stock_artcom,full_price_artcom,full_stock_artcom,location_artcom"
             );
             dataArtCom.append("linkTo", "id_article_artcom,id_company_artcom");
             dataArtCom.append(
@@ -165,6 +165,11 @@ $(document).on("click", ".articuloPerfil", function () {
                             style: "currency",
                             currency: "PEN",
                         }).format(frac_price_artcom);
+
+                    var location_artcom =
+                        artscoms.results[0]["location_artcom"];
+                    document.getElementById("location_artcom").innerHTML =
+                        location_artcom;
                 },
             });
             //*Fin Artcom
@@ -314,7 +319,7 @@ function importArticle(event, idDbArticle) {
     });
 }
 
-//*Ver el perfil del articulo
+//*Configurar articulo
 $(document).on("click", ".btnConfigurarArticulo", function () {
     var id_article = $(this).attr("id_article");
     $("#id_article").val(id_article);
@@ -366,6 +371,34 @@ $(document).on("click", ".btnConfigurarArticulo", function () {
             var artscoms = JSON.parse(response);
 
             $("#location").val(artscoms.results[0]["location_artcom"]);
+        },
+    });
+});
+
+//*Aprobar o rechazar Cambios
+$(document).on("click", ".solicitud", function () {
+    var idBArticle = $(this).attr("idItem");
+    var status = $(this).attr("status");
+
+    var data = new FormData();
+    data.append("idBArticle", idBArticle);
+    data.append("status", status);
+
+    $.ajax({
+        url: "ajax/articles/ajax-articles.php",
+        method: "POST",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            if (response == 200) {
+                fncSweetAlert(
+                    "success",
+                    "Your records were created successfully",
+                    "/articles/request"
+                );
+            }
         },
     });
 });

@@ -37,7 +37,12 @@
 
         if (isset($routesArray[2])) {
 
-            if ($routesArray[2] == "new" || $routesArray[2] == "edit" || $routesArray[2] == "import") {
+            if (
+                $routesArray[2] == "new" ||
+                $routesArray[2] == "edit" ||
+                $routesArray[2] == "import" ||
+                $routesArray[2] == "request"
+            ) {
 
                 include "actions/" . $routesArray[2] . ".php";
             }

@@ -18,9 +18,14 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
 <div class="card">
     <div class="card-header">
 
-        <h3 class="card-title">
-            <a class="btn bg-dark btn-sm" href="/therapies/new">Nueva Terapia</a>
-        </h3>
+        <?php if ($_SESSION["admin"]->rol_user == "administrador") : ?>
+
+            <h3 class="card-title">
+                <a class="btn bg-dark btn-sm" href="/therapies/new">Nueva Terapia</a>
+            </h3>
+
+        <?php endif ?>
+
 
         <div class="card-tools">
 
@@ -44,23 +49,54 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
         </div>
 
     </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-        <table id="adminsTable" class="table table-bordered table-striped tableTherapies">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Codigo</th>
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
 
-        </table>
+    <div class="form-group row">
+
+        <div class="col-lg-9">
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="adminsTable" class="table table-bordered table-striped tableTherapies">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+
+            <hr>
+
+            <!-- About Me Box -->
+            <div class="card card-dark">
+                <div class="card-header">
+                    <h3 class="card-title">Disponible</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                    <strong><i class="fas fa-pencil-alt mr-1"></i> Alternativas</strong>
+
+                    <div class="form-group similares" id="similares">
+
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
     </div>
-    <!-- /.card-body -->
+
+
 </div>
 
 

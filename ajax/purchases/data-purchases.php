@@ -57,15 +57,14 @@ class DatatableController
 
                         $dataTotal = CurlController::request($urlTotal, $method, $fields)->results;
 
-                        $url = "relations?rel=purchases,providers,companies&type=type=purchase,provider,company&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
+                        $url = "relations?rel=purchases,providers,companies&type=purchase,provider,company&select=" . $select . "&linkTo=" . $value . "&search=" . $search . "&orderBy=" . $orderBy . "&orderMode=" . $orderType . "&startAt=" . $start . "&endAt=" . $length;
 
                         $data = CurlController::request($url, $method, $fields)->results;
 
                         if ($data  == "Not Found") {
 
-                            echo '{"data": []}';
-
-                            return;
+                            $data = array();
+                            $recordsFiltered = count($data);
                         } else {
 
                             $data = $data;

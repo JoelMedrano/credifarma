@@ -57,7 +57,7 @@ class CategoriesController
 						fncFormatInputs();
 						matPreloader("off");
 						fncSweetAlert("close", "", "");
-						fncNotie(3, "Error saving catogory");
+						fncNotie(3, "Error saving category");
 
 					</script>';
                 }

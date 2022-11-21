@@ -226,6 +226,46 @@ function execDatatable(text) {
     }
 
     /*=============================================
+    Validamos tabla de solicitud de articulos
+    =============================================*/
+    if ($(".tableBArticles").length > 0) {
+        var url =
+            "ajax/articles/data-barticles.php?text=" +
+            text +
+            "&between1=" +
+            $("#between1").val() +
+            "&between2=" +
+            $("#between2").val() +
+            "&token=" +
+            localStorage.getItem("token_user");
+        var columns = [
+            { data: "id_barticle" },
+            { data: "code_barticle" },
+            { data: "name_barticle" },
+            { data: "name_atherapy", className: "bold" },
+            { data: "name_btherapy", className: "bg-green" },
+            { data: "name_asubstance", className: "bold" },
+            { data: "name_bsubstance", className: "bg-green" },
+            { data: "location_barticle" },
+            { data: "observation_barticle" },
+            { data: "usreg_barticle" },
+            { data: "date_created_barticle", width: "5%" },
+            {
+                data: "actions",
+                orderable: false,
+                width: "5%",
+                className: "text-center",
+            },
+        ];
+        var order = [[1, "asc"]];
+        var aLengthMenu = [
+            [20, 50, 100, 500, 1000],
+            [20, 50, 100, 500, 1000],
+        ];
+        page = "articles/request";
+    }
+
+    /*=============================================
     Validamos tabla de proveedores
     =============================================*/
     if ($(".tableProviders").length > 0) {

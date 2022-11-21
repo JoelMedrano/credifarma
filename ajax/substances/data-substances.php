@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once "../../controllers/curl.controller.php";
 require_once "../../controllers/template.controller.php";
 
@@ -114,19 +116,35 @@ class DatatableController
                     $actions = "";
                 } else {
 
-                    if ($value->state_substance == "1") {
+                    if ($_SESSION["admin"]->rol_user == "administrador") {
+                        if ($value->state_substance == "1") {
 
-                        $state_substance = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_substance . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                            $state_substance = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_substance . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        } else {
+
+                            $state_substance = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_substance . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        }
+                        $actions = "<a href='/substances/edit/" . base64_encode($value->id_substance . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
+    
+                        <i class='fas fa-pencil-alt'></i>
+    
+                        </a>
+                        <a class='btn btn-primary btn-xs rounded-circle mr-1 sustanciaPerfil' idItem='" . $value->id_substance . "'>
+    
+                            <i class='fas fa-search'></i>
+    
+                        </a>";
                     } else {
+                        $state_substance = "";
 
-                        $state_substance = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_substance . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        $actions = "<a class='btn btn-primary btn-xs rounded-circle mr-1 sustanciaPerfil' idItem='" . $value->id_substance . "'>
+    
+                            <i class='fas fa-search'></i>
+    
+                        </a>";
                     }
 
-                    $actions = "<a href='/substances/edit/" . base64_encode($value->id_substance . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
 
-                    <i class='fas fa-pencil-alt'></i>
-
-                    </a>";
 
                     $actions = TemplateController::htmlClean($actions);
                 }

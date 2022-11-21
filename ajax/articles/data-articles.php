@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once "../../controllers/curl.controller.php";
 require_once "../../controllers/template.controller.php";
@@ -47,7 +48,7 @@ class DatatableController
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["name_article", "name_laboratory", "name_category"];
+                    $linkTo = ["code_article", "name_article", "name_laboratory", "name_category"];
 
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
@@ -63,12 +64,8 @@ class DatatableController
 
                         if ($data  == "Not Found") {
 
-                            /* $data = array();
-                            $recordsFiltered = count($data); */
-
-                            echo '{"data": []}';
-
-                            return;
+                            $data = array();
+                            $recordsFiltered = count($data);
                         } else {
 
                             $data = $data;
@@ -121,13 +118,6 @@ class DatatableController
                     $actions = "";
                 } else {
 
-                    if ($value->state_article == "1") {
-
-                        $state_article = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_article . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
-                    } else {
-
-                        $state_article = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_article . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
-                    }
 
                     if ($value->prescription_article == "SI") {
 
@@ -137,21 +127,42 @@ class DatatableController
                         $prescription_article = "<span class='badge badge-success p-2'>NO</span>";
                     }
 
-                    $actions = "<a href='/articles/edit/" . base64_encode($value->id_article . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
+                    if ($_SESSION["admin"]->rol_user == "administrador") {
 
-                        <i class='fas fa-pencil-alt'></i>
+                        if ($value->state_article == "1") {
 
-                    </a>
-                    <a class='btn btn-primary btn-xs rounded-circle mr-1 articuloPerfil' idItem='" . $value->id_article . "'>
+                            $state_article = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' checked onchange='changeState(event," . $value->id_article . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        } else {
 
-			            <i class='fas fa-search'></i>
+                            $state_article = "<div class='custom-control custom-switch'><input type='checkbox' class='custom-control-input' id='switch" . $key . "' onchange='changeState(event," . $value->id_article . ")'><label class='custom-control-label' for='switch" . $key . "'></label></div>";
+                        }
 
-			        </a>
-                    <button class='btn bg-navy btn-xs btnConfigurarArticulo' title='Configuración' data-toggle='modal' data-target='#modalConfigurarArticulo'
-                    id_article=" . $value->id_article . " 
-                    code_article=" . $value->code_article . ">
-                        <i class='fas fa-cogs'></i>
-                    </button>";
+                        $actions = "<a href='/articles/edit/" . base64_encode($value->id_article . "~" . $_GET["token"]) . "' class='btn btn-warning btn-xs mr-1 rounded-circle'>
+    
+                            <i class='fas fa-pencil-alt'></i>
+    
+                        </a>
+                        <button class='btn bg-navy btn-xs btnConfigurarArticulo' title='Configuración' data-toggle='modal' data-target='#modalConfigurarArticulo'
+                        id_article=" . $value->id_article . " 
+                        code_article=" . $value->code_article . ">
+                            <i class='fas fa-cogs'></i>
+                        </button>";
+                    } else {
+
+                        $state_article = "";
+
+                        $actions = "<a class='btn btn-primary btn-xs rounded-circle mr-1 articuloPerfil' idItem='" . $value->id_article . "'>
+
+                            <i class='fas fa-search'></i>
+
+                        </a>
+                        <button class='btn bg-navy btn-xs btnConfigurarArticulo' title='Configuración' data-toggle='modal' data-target='#modalConfigurarArticulo'
+                        id_article=" . $value->id_article . " 
+                        code_article=" . $value->code_article . ">
+                            <i class='fas fa-cogs'></i>
+                        </button>";
+                    }
+
 
                     $actions = TemplateController::htmlClean($actions);
                 }

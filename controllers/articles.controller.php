@@ -290,6 +290,7 @@ class ArticlesController
                     "name_barticle" => trim(strtoupper($_POST["name"])),
                     "id_therapy_barticle" => trim(strtoupper($_POST["therapy"])),
                     "id_substance_barticle" => trim(strtoupper($_POST["substance"])),
+                    "location_barticle" => trim(strtoupper($_POST["location"])),
                     "observation_barticle" => trim(strtoupper($_POST["observation"])),
                     "pcreg_barticle" =>  $pcreg_barticle,
                     "usreg_barticle" =>  $usreg_barticle,
@@ -303,9 +304,48 @@ class ArticlesController
                 $fields = $data;
 
                 $response = CurlController::request($url, $method, $fields);
-                echo '<pre>';
-                print_r($response);
-                echo '</pre>';
+
+                if ($response->status == 200) {
+
+                    $select = "id_artcom";
+
+                    $url = "artscoms?select=" . $select . "&linkTo=id_article_artcom,id_company_artcom&equalTo=" . $_POST["id_article"] . "," . $_POST["id_company"];
+                    $method = "GET";
+                    $fields = array();
+
+                    $artcom = CurlController::request($url, $method, $fields)->results[0];
+
+                    $data =
+                        "location_artcom=" . trim(strtoupper($_POST["location"])) .
+                        "&pcmod_artcom=" .  $pcreg_barticle .
+                        "&usmod_artcom=" .  $usreg_barticle;
+
+                    //*Solicitud a la API
+                    $url = "artscoms?id=" . $artcom->id_artcom . "&nameId=id_artcom&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+                    $method = "PUT";
+                    $fields = $data;
+
+                    $response = CurlController::request($url, $method, $fields);
+                    if ($response->status == 200) {
+                        echo '<script>
+
+                        fncFormatInputs();
+                        matPreloader("off");
+                        fncSweetAlert("close", "", "");
+                        fncSweetAlert("success", "Your records were created successfully", "/articles");
+
+                    </script>';
+                    }
+                } else {
+                    echo '<script>
+
+						fncFormatInputs();
+						matPreloader("off");
+						fncSweetAlert("close", "", "");
+						fncNotie(3, "Error saving request");
+
+					</script>';
+                }
             } else {
 
                 echo '<script>

@@ -1,7 +1,7 @@
 <div class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <img src="views/assets/img/template/logo_light.png" style="opacity: .8">
+            <img src="views/assets/img/template/logo.png" width="350px" style="opacity: .8">
         </div>
         <!-- /.login-logo -->
         <div class="card">

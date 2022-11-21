@@ -96,6 +96,15 @@ foreach ($routesArray as $key => $value) {
             font-family: Verdana;
             font-size: 12px;
         }
+
+        td.bold {
+            font-weight: bold !important;
+        }
+
+        td.bg-green {
+            background-color: #77dd77 !important;
+            color: black !important;
+        }
     </style>
 
     <?php if (!empty($routesArray[1]) && !isset($routesArray[2])) : ?>
@@ -107,7 +116,6 @@ foreach ($routesArray as $key => $value) {
             $routesArray[1] == "therapies" ||
             $routesArray[1] == "substances" ||
             $routesArray[1] == "articles" ||
-            $routesArray[1] == "import" ||
             $routesArray[1] == "providers" ||
             $routesArray[1] == "purchases" ||
             $routesArray[1] == "globalarticles"
@@ -142,7 +150,8 @@ foreach ($routesArray as $key => $value) {
         (($routesArray[1] == "purchases" &&
             ($routesArray[2] == "new" || $routesArray[2] == "edit")) ||
             ($routesArray[1] == "articles" &&
-                ($routesArray[2] == "import")))
+                ($routesArray[2] == "import" ||
+                    $routesArray[2] == "request")))
     ) : ?>
 
         <!-- DataTables  & Plugins -->
@@ -216,7 +225,10 @@ foreach ($routesArray as $key => $value) {
                     ) {
 
                         include "views/pages/" . $routesArray[1] . "/" . $routesArray[1] . ".php";
-                    } else if ($routesArray[1] == "import") {
+                    } else if (
+                        $routesArray[1] == "import" ||
+                        $routesArray[1] == "request"
+                    ) {
                         include "views/pages/articles/actions/" . $routesArray[1] . ".php";
                     } else {
 

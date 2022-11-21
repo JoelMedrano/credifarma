@@ -111,6 +111,54 @@ class AdminsController
 
         echo json_encode($response);
     }
+
+    public function dataRequest()
+    {
+
+        $url = "barticles?select=*&linkTo=id_barticle&equalTo=" . $this->idBArticle;
+        $method = "GET";
+        $fields = array();
+
+        $barticle = CurlController::request($url, $method, $fields)->results[0];
+
+        if ($this->status == 2) {
+            //*Agrupamos la información 
+            $pcmod_article = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $usmod_article = $_SESSION["admin"]->username_user;
+
+            $data =
+
+                "&id_therapy_article=" . $barticle->id_therapy_barticle .
+                "&id_substance_article=" . $barticle->id_substance_barticle .
+                "&pcmod_article=" .  $pcmod_article .
+                "&usmod_article=" .  $usmod_article;
+
+            //*Solicitud a la API
+            $url = "articles?id=" . $barticle->id_article_barticle . "&nameId=id_article&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+            $method = "PUT";
+            $fields = $data;
+
+            $response = CurlController::request($url, $method, $fields);
+            if ($response->status == 200) {
+
+                $url = "barticles?id=" . $barticle->id_barticle . "&nameId=id_barticle&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+                $method = "PUT";
+                $fields = "state_barticle=" . $this->status;
+
+                $status = CurlController::request($url, $method, $fields);
+            }
+            echo json_encode($response->status);
+        } else {
+
+            $url = "barticles?id=" . $barticle->id_barticle . "&nameId=id_barticle&token=" . $_SESSION["admin"]->token_user . "&table=users&suffix=user";
+            $method = "PUT";
+            $fields = "state_barticle=" . $this->status;;
+
+            $status = CurlController::request($url, $method, $fields)->status;
+
+            echo json_encode($status);
+        }
+    }
 }
 
 if (isset($_POST["idArticle"])) {
@@ -127,4 +175,11 @@ if (isset($_POST["idDbArticle"])) {
     $state->idDbArticle = $_POST["idDbArticle"];
     $state->dbtoken = $_POST["dbtoken"];
     $state->dataImport();
+}
+
+if (isset($_POST["idBArticle"])) {
+    $state = new AdminsController();
+    $state->idBArticle = $_POST["idBArticle"];
+    $state->status = $_POST["status"];
+    $state->dataRequest();
 }

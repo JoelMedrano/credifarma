@@ -18,13 +18,16 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
 <div class="card">
     <div class="card-header">
 
-        <h3 class="card-title">
-            <a class="btn bg-dark btn-sm mr-2" href="/articles/new">Nuevo Artículo</a>
-        </h3>
+        <?php if ($_SESSION["admin"]->rol_user == "administrador") : ?>
+            <h3 class="card-title">
+                <a class="btn bg-dark btn-sm mr-2" href="/articles/new">Nuevo Artículo</a>
+            </h3>
 
-        <h3 class="card-title">
-            <a class="btn bg-dark btn-sm" href="/articles/import">Importar Artículo</a>
-        </h3>
+            <h3 class="card-title">
+                <a class="btn bg-dark btn-sm" href="/articles/import">Importar Artículo</a>
+            </h3>
+        <?php endif ?>
+
 
         <div class="card-tools">
 
@@ -105,6 +108,9 @@ if (isset($_GET["start"]) && isset($_GET["end"])) {
                                     </li>
                                     <li class="list-group-item p-0">
                                         <b>Receta Médica</b> <a class="float-right" id="prescription_article"></a>
+                                    </li>
+                                    <li class="list-group-item p-0">
+                                        <b>Ubicación</b> <a class="float-right" id="location_artcom"></a>
                                     </li>
                                 </ul>
 
