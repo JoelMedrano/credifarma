@@ -47,7 +47,7 @@ class DatatableController
 
                 if (preg_match('/^[0-9A-Za-zñÑáéíóú ]{1,}$/', $_POST['search']['value'])) {
 
-                    $linkTo = ["name_dbarticle", "name_laboratory", "name_category"];
+                    $linkTo = ["code_dbarticle", "name_dbarticle", "name_laboratory", "name_category"];
 
                     $search = str_replace(" ", "_", $_POST['search']['value']);
 
@@ -63,12 +63,8 @@ class DatatableController
 
                         if ($data  == "Not Found") {
 
-                            /* $data = array();
-                            $recordsFiltered = count($data); */
-
-                            echo '{"data": []}';
-
-                            return;
+                            $data = array();
+                            $recordsFiltered = count($data);
                         } else {
 
                             $data = $data;
